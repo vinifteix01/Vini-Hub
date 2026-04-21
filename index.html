@@ -307,6 +307,61 @@ select.f-input{appearance:none}
 .proj-modal-section-title{font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
 .add-inline-btn{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--tx2);padding:6px 0;cursor:pointer;background:none;border:none;font-family:inherit;width:100%}
 .add-inline-btn:hover{color:var(--tx)}
+/* ── TIMELINE (curto prazo) ── */
+.tl-wrap{padding:0 20px 16px 20px}
+.tl-step-row{display:flex;align-items:flex-start;gap:0;position:relative}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0}
+.tl-node{width:14px;height:14px;border-radius:50%;flex-shrink:0;position:relative;z-index:1;transition:all .15s}
+.tl-node.done{background:var(--fi-c)}
+.tl-node.active{background:var(--cl);box-shadow:0 0 0 4px rgba(91,140,219,.2)}
+.tl-node.future{background:#fff;border:2px solid rgba(0,0,0,.12)}
+.tl-connector{width:2px;flex:1;min-height:12px;background:rgba(0,0,0,.08);margin:0}
+.tl-connector.done{background:var(--fi-c)}
+.tl-content{flex:1;min-width:0;padding:0 0 14px 10px}
+.tl-text-done{font-size:12px;font-weight:500;color:var(--tx2);text-decoration:line-through;padding-top:0px}
+.tl-text-active{font-size:13px;font-weight:700;color:var(--tx);padding-top:0}
+.tl-text-future{font-size:12px;font-weight:500;color:var(--tx2);opacity:.45;padding-top:0}
+.tl-active-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;background:rgba(91,140,219,.12);color:var(--cl);margin-bottom:3px;text-transform:uppercase;letter-spacing:.04em}
+/* ── PRÓXIMA AÇÃO (curto prazo) ── */
+.proxima-acao-wrap{padding:12px 20px;border-bottom:1px solid var(--bd);background:rgba(91,140,219,.04)}
+.proxima-acao-lbl{font-size:9px;font-weight:700;color:var(--cl);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.proxima-acao-input{width:100%;font-size:12px;font-weight:600;color:var(--tx);background:transparent;border:none;outline:none;font-family:"DM Sans",sans-serif;padding:0;cursor:text}
+.proxima-acao-input::placeholder{color:var(--tx2);font-weight:400}
+/* ── BLOQUEIO (longo prazo) ── */
+.bloqueio-wrap{margin:0 20px 12px;border-radius:12px;overflow:hidden}
+.bloqueio-hd{display:flex;align-items:center;gap:8px;padding:9px 14px;background:rgba(255,149,0,.1);cursor:pointer}
+.bloqueio-dot{width:7px;height:7px;border-radius:50%;background:var(--pr);flex-shrink:0}
+.bloqueio-lbl{font-size:11px;font-weight:700;color:var(--pr);flex:1}
+.bloqueio-input{width:100%;font-size:12px;font-weight:500;color:var(--tx);background:rgba(255,149,0,.06);border:none;outline:none;font-family:"DM Sans",sans-serif;padding:8px 14px;display:none;resize:none}
+.bloqueio-wrap.open .bloqueio-input{display:block}
+.bloqueio-wrap.empty .bloqueio-hd{background:rgba(0,0,0,.04)}
+.bloqueio-wrap.empty .bloqueio-dot{background:rgba(0,0,0,.15)}
+.bloqueio-wrap.empty .bloqueio-lbl{color:var(--tx2);font-weight:500}
+/* ── FOCO ATUAL destacado (longo prazo) ── */
+.foco-atual-wrap{padding:0 20px 6px}
+.foco-atual-banner{background:rgba(91,140,219,.08);border:1.5px solid rgba(91,140,219,.2);border-radius:14px;padding:12px 16px;margin-bottom:8px}
+.foco-atual-lbl{font-size:9px;font-weight:700;color:var(--cl);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.foco-atual-text{font-size:13px;font-weight:700;color:var(--tx);line-height:1.35}
+.focos-restantes{padding:0 20px 16px}
+.focos-rest-lbl{font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.focos-rest-body{display:none}
+.focos-rest-body.open{display:block}
+/* ── VISÃO GERAL reformulada ── */
+.next-action-list{display:flex;flex-direction:column;gap:8px}
+.na-item{background:#fff;border-radius:14px;padding:14px 18px;display:flex;align-items:flex-start;gap:12px;transition:box-shadow .12s}
+.na-item:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)}
+.na-color-bar{width:4px;border-radius:2px;flex-shrink:0;align-self:stretch;min-height:36px}
+.na-body{flex:1;min-width:0}
+.na-proj-name{font-size:10px;font-weight:700;color:var(--tx2);margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.na-chip{display:inline-flex;align-items:center;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700}
+.na-action{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:2px;line-height:1.3}
+.na-action.placeholder{color:var(--tx2);font-weight:400;font-style:italic}
+.na-meta{font-size:10px;color:var(--tx2)}
+.na-priority{width:22px;height:22px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;color:#fff}
+.na-sem-foco{opacity:.45}
+.obj-final-strip{padding:10px 20px;background:rgba(0,0,0,.02);border-bottom:1px solid var(--bd)}
+.obj-final-lbl{font-size:9px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
+.obj-final-text{font-size:11px;color:var(--tx);font-weight:500;line-height:1.35}
 .sidebar{display:none;position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--card);border-right:1px solid var(--bd);z-index:150;flex-direction:column;padding:20px 12px;overflow-y:auto}
 .sidebar-logo{font-size:15px;font-weight:800;letter-spacing:-.3px;padding:4px 10px;margin-bottom:24px;cursor:pointer;color:var(--tx)}
 .sidebar-section{font-size:9px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.08em;padding:0 10px;margin-bottom:6px;margin-top:18px}
@@ -881,14 +936,14 @@ function saveProj(p){try{localStorage.setItem(PROJ_KEY,JSON.stringify(p));}catch
 function buildProjSeed(){
   return{
     longo:[
-      {id:1,name:"Curitiba Hard Punchers — Psicologia do Esporte",objetivo:"Publicar um artigo que retrate todo o trabalho realizado com a equipe, formando atletas e seres humanos melhores.",prazo:"2026-12-31",color:"#5B8CDB",focos:[
+      {id:1,name:"Curitiba Hard Punchers — Psicologia do Esporte",objetivo:"Publicar um artigo que retrate todo o trabalho realizado com a equipe, formando atletas e seres humanos melhores.",prazo:"2026-12-31",color:"#5B8CDB",bloqueio:"",focos:[
         {id:1,texto:"Fazer os atletas novos aderirem aos métodos de treinamento",done:false},
         {id:2,texto:"Investigar o que a equipe técnica observa em relação ao potencial de cada atleta",done:false},
         {id:3,texto:"Alinhar atuação junto à equipe técnica",done:false},
       ]},
     ],
     curto:[
-      {id:10,name:"Reposicionamento no LinkedIn",desc:"Atualização completa do perfil e estratégia de conteúdo",tipo:"steps",color:"#FF9500",steps:[
+      {id:10,name:"Reposicionamento no LinkedIn",desc:"Atualização completa do perfil e estratégia de conteúdo",tipo:"steps",color:"#FF9500",proximaAcao:"Adaptar outros aspectos do perfil",steps:[
         {id:1,texto:"Adaptação de termos da bio",done:true},
         {id:2,texto:"Adaptação de descrição própria",done:true},
         {id:3,texto:"Adaptação de outros aspectos do perfil",done:false},
@@ -1698,62 +1753,110 @@ function renderProjetos(){
   else if(PTAB==="focos")renderProjFocos();
 }
 function renderProjVisao(){
+  const allProjs=[...PROJ.longo,...PROJ.curto];
+  const focosSorted=PROJ.focos.slice().sort((a,b)=>(a.ordem||99)-(b.ordem||99));
+  // Monta lista de próximas ações ordenada por prioridade de foco
+  const projComFoco=focosSorted.map(f=>{
+    const proj=allProjs.find(p=>p.id===f.projId);
+    if(!proj)return null;
+    return{proj,foco:f,prioridade:f.ordem||99};
+  }).filter(Boolean);
+  // Projetos sem foco aparecem por último
+  const projSemFoco=allProjs.filter(p=>!focosSorted.some(f=>f.projId===p.id));
+  const listaFinal=[...projComFoco,...projSemFoco.map(p=>({proj:p,foco:null,prioridade:999}))];
   const totalL=PROJ.longo.length,totalC=PROJ.curto.length;
   const concL=PROJ.longo.filter(p=>longoProgresso(p).pct===100).length;
   const concC=PROJ.curto.filter(p=>projProgresso(p).pct===100).length;
-  const topFocos=PROJ.focos.slice().sort((a,b)=>(a.ordem||99)-(b.ordem||99)).slice(0,3);
-  // Em andamento agrupados
-  const emAndamento=[
-    ...PROJ.curto.filter(p=>projProgresso(p).pct<100&&projProgresso(p).pct>0).map(p=>({...p,_tipo:"curto"})),
-    ...PROJ.longo.filter(p=>longoProgresso(p).pct<100).map(p=>({...p,_tipo:"longo"})),
-  ];
+  const bloqueados=PROJ.longo.filter(p=>p.bloqueio&&p.bloqueio.trim()).length;
+  function getProxAcao(proj){
+    if(proj.tipo==="steps"||proj.steps){
+      const nextStep=(proj.steps||[]).find(s=>!s.done);
+      return proj.proximaAcao||nextStep?.texto||null;
+    }
+    if(proj.tipo==="horas") return proj.proximaAcao||`${proj.horasFeitas||0}h de ${proj.horasTotal||0}h concluídas`;
+    // longo prazo
+    const focusAtual=(proj.focos||[]).find(f=>!f.done);
+    return proj.proximaAcao||focusAtual?.texto||null;
+  }
+  function getProgText(proj){
+    if(proj.steps){const prog=projProgresso(proj);return`${prog.done}/${prog.total} steps · ${prog.pct}%`;}
+    if(proj.tipo==="horas"){const prog=projProgresso(proj);return`${prog.done}h de ${prog.total}h · ${prog.pct}%`;}
+    const prog=longoProgresso(proj);return`${prog.done}/${prog.total} focos · ${prog.pct}%`;
+  }
+  const naHtml=listaFinal.map(({proj,foco,prioridade},i)=>{
+    const cor=proj.color||"#888";
+    const isLongo=PROJ.longo.some(p=>p.id===proj.id);
+    const proxAcao=getProxAcao(proj);
+    const progText=getProgText(proj);
+    const hasBloqueio=isLongo&&proj.bloqueio&&proj.bloqueio.trim();
+    const semFoco=!foco;
+    return`<div class="na-item${semFoco?" na-sem-foco":""}">
+      ${prioridade<999?`<div class="na-priority" style="background:${cor}">${i+1}</div>`:`<div style="width:22px;height:22px;border-radius:7px;background:rgba(0,0,0,.06);flex-shrink:0;display:flex;align-items:center;justify-content:center"><div style="width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.2)"></div></div>`}
+      <div class="na-color-bar" style="background:${cor}"></div>
+      <div class="na-body">
+        <div class="na-proj-name">
+          <span style="color:${cor}">${proj.name}</span>
+          <span class="na-chip" style="background:${cor}18;color:${cor}">${isLongo?"Longo prazo":"Curto prazo"}</span>
+          ${hasBloqueio?`<span class="na-chip" style="background:rgba(255,149,0,.12);color:var(--pr)">⚠ Bloqueado</span>`:""}
+          ${semFoco?`<span class="na-chip" style="background:rgba(0,0,0,.06);color:var(--tx2)">sem foco</span>`:""}
+        </div>
+        <div class="na-action${proxAcao?"":" placeholder"}">${proxAcao||"Nenhuma próxima ação definida — clique para editar"}</div>
+        <div class="na-meta">${progText}${foco?` · Foco: ${foco.texto.length>40?foco.texto.slice(0,40)+"…":foco.texto}`:""}</div>
+      </div>
+      <button style="font-size:10px;padding:4px 10px;border-radius:9px;background:rgba(0,0,0,.06);color:var(--tx2);white-space:nowrap" data-na-goto="${isLongo?"longo":"curto"}">Abrir →</button>
+    </div>`;
+  }).join("");
   document.getElementById("proj-content").innerHTML=`
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
-    <div class="w dark" style="margin:0"><div class="w-lbl">Projetos ativos</div><div style="font-size:28px;font-weight:800;color:#fff">${totalL+totalC}</div><div class="w-sub">${totalL} longo · ${totalC} curto prazo</div></div>
-    <div class="w acc-fi" style="margin:0"><div class="w-lbl">Concluídos</div><div style="font-size:28px;font-weight:800;color:#fff">${concL+concC}</div><div class="w-sub">${concL} longo · ${concC} curto</div></div>
-    <div class="w acc-pr" style="margin:0"><div class="w-lbl">Focos do momento</div><div style="font-size:28px;font-weight:800;color:#fff">${PROJ.focos.length}</div><div class="w-sub">prioridades ativas</div></div>
-    <div class="w acc-cl" style="margin:0"><div class="w-lbl">Em andamento</div><div style="font-size:28px;font-weight:800;color:#fff">${emAndamento.length}</div><div class="w-sub">projetos com progresso</div></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+    <div class="w dark" style="margin:0"><div class="w-lbl">Projetos</div><div style="font-size:26px;font-weight:800;color:#fff">${totalL+totalC}</div><div class="w-sub">${totalL} longo · ${totalC} curto</div></div>
+    <div class="w acc-fi" style="margin:0"><div class="w-lbl">Concluídos</div><div style="font-size:26px;font-weight:800;color:#fff">${concL+concC}</div><div class="w-sub">${concL} longo · ${concC} curto</div></div>
+    <div class="w acc-pr" style="margin:0"><div class="w-lbl">Focos ativos</div><div style="font-size:26px;font-weight:800;color:#fff">${PROJ.focos.length}</div><div class="w-sub">prioridades definidas</div></div>
+    <div class="w ${bloqueados>0?"acc-ha":"dark2"}" style="margin:0"><div class="w-lbl">Bloqueados</div><div style="font-size:26px;font-weight:800;color:#fff">${bloqueados}</div><div class="w-sub">${bloqueados>0?"requer atenção":"tudo desbloqueado"}</div></div>
   </div>
-  <div style="display:grid;grid-template-columns:3fr 2fr;gap:16px">
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:16px">
     <div>
-      <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Em progresso</div>
-      ${emAndamento.length?emAndamento.map(p=>{
-        const prog=p._tipo==="curto"?projProgresso(p):longoProgresso(p);
-        const cor=p.color||"#888";
-        return`<div class="proj-card" data-vid="${p.id}" data-vt="${p._tipo}">
-          <div class="proj-card-hd" style="cursor:default">
-            <div class="proj-accent" style="background:${cor}"></div>
-            <div class="proj-card-meta">
-              <div class="proj-card-type" style="color:${cor}">${p._tipo==="curto"?"Curto prazo":"Longo prazo"}</div>
-              <div class="proj-card-name">${p.name}</div>
-            </div>
-            <div style="font-size:18px;font-weight:800;font-family:'DM Mono',monospace;color:${cor};flex-shrink:0">${prog.pct}%</div>
-          </div>
-          <div class="proj-prog-wrap">
-            <div class="proj-prog-track"><div class="proj-prog-fill" style="width:${prog.pct}%;background:${cor}"></div></div>
-            <div class="proj-prog-lbl"><span>${prog.done} de ${prog.total} ${p._tipo==="curto"&&p.tipo==="horas"?"horas":"etapas"}</span><span style="color:${cor}">${prog.pct===100?"Concluído":prog.pct+"%"}</span></div>
-          </div>
-        </div>`;
-      }).join(""):'<div class="w" style="text-align:center;padding:32px;color:var(--tx2)">Nenhum projeto em andamento ainda.</div>'}
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em">Próximas ações — por prioridade</div>
+        <span style="font-size:11px;color:var(--tx2)">${listaFinal.length} projeto${listaFinal.length!==1?"s":""}</span>
+      </div>
+      <div class="next-action-list">${naHtml||'<div class="w" style="text-align:center;padding:32px;color:var(--tx2)">Nenhum projeto ainda.</div>'}</div>
     </div>
-    <div>
-      <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Focos prioritários</div>
-      ${topFocos.length?topFocos.map((f,i)=>{
-        const proj=[...PROJ.longo,...PROJ.curto].find(p=>p.id===f.projId);
-        const cor=proj?.color||"#888";
-        return`<div class="foco-card">
-          <div class="foco-num" style="background:${cor}">${i+1}</div>
-          <div class="foco-body">
-            <div class="foco-proj" style="color:${cor}">${proj?.name||"Geral"}</div>
-            <div class="foco-text">${f.texto}</div>
-            ${f.why?`<div class="foco-why">${f.why}</div>`:""}
-          </div>
-        </div>`;
-      }).join(""):'<div class="w" style="text-align:center;padding:32px;color:var(--tx2)">Nenhum foco definido.</div>'}
-      <button class="mod-btn mod-btn-ghost" style="width:100%;margin-top:4px" id="vis-ver-focos">Ver todos os focos →</button>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="w" style="margin:0;padding:0;overflow:hidden">
+        <div style="padding:12px 16px;border-bottom:1px solid var(--bd);font-size:12px;font-weight:700">Focos prioritários</div>
+        <div style="padding:10px 16px;display:flex;flex-direction:column;gap:6px">
+          ${focosSorted.slice(0,4).map((f,i)=>{
+            const proj=allProjs.find(p=>p.id===f.projId);const cor=proj?.color||"#888";
+            return`<div style="display:flex;align-items:flex-start;gap:8px">
+              <div style="width:18px;height:18px;border-radius:6px;background:${cor};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:#fff;flex-shrink:0">${i+1}</div>
+              <div style="font-size:11px;color:var(--tx);line-height:1.35;flex:1">${f.texto}</div>
+            </div>`;
+          }).join("")||'<div style="font-size:11px;color:var(--tx2);text-align:center;padding:8px 0">Nenhum foco definido.</div>'}
+        </div>
+        <div style="padding:8px 16px;border-top:1px solid var(--bd)">
+          <button class="mod-btn mod-btn-ghost" style="width:100%;font-size:11px" id="vis-ver-focos">Gerenciar focos →</button>
+        </div>
+      </div>
+      <div class="w" style="margin:0;padding:0;overflow:hidden">
+        <div style="padding:12px 16px;border-bottom:1px solid var(--bd);font-size:12px;font-weight:700">Sem foco definido</div>
+        <div style="padding:10px 16px">
+          ${projSemFoco.length?projSemFoco.map(p=>`
+            <div style="display:flex;align-items:center;gap:8px;padding:4px 0">
+              <div style="width:6px;height:6px;border-radius:50%;background:${p.color||"#888"};flex-shrink:0"></div>
+              <div style="font-size:11px;color:var(--tx2);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</div>
+              <button style="font-size:9px;padding:2px 7px;border-radius:7px;background:rgba(0,0,0,.06);color:var(--tx2);white-space:nowrap" data-quick-foco="${p.id}">+ foco</button>
+            </div>`).join(""):`<div style="font-size:11px;color:var(--fi-c);text-align:center;padding:8px 0;font-weight:600">Todos têm foco ✓</div>`}
+        </div>
+      </div>
     </div>
   </div>`;
   document.getElementById("vis-ver-focos")?.addEventListener("click",()=>{PTAB="focos";renderProjetos();});
+  document.getElementById("proj-content").querySelectorAll("[data-na-goto]").forEach(btn=>{
+    btn.addEventListener("click",()=>{PTAB=btn.dataset.naGoto;renderProjetos();});
+  });
+  document.getElementById("proj-content").querySelectorAll("[data-quick-foco]").forEach(btn=>{
+    btn.addEventListener("click",()=>openFocoModal(+btn.dataset.quickFoco));
+  });
 }
 
 function renderProjLongo(){
@@ -1761,54 +1864,131 @@ function renderProjLongo(){
     const prog=longoProgresso(p);const cor=p.color||"#5B8CDB";
     const focosAtivos=(p.focos||[]).filter(f=>!f.done);
     const focosConcl=(p.focos||[]).filter(f=>f.done);
+    const focoAtual=focosAtivos[0]||null;
+    const focosRest=focosAtivos.slice(1);
+    const hasBloqueio=p.bloqueio&&p.bloqueio.trim();
     return`<div class="proj-card">
+      <!-- Header com objetivo fixo -->
+      <div class="obj-final-strip">
+        <div class="obj-final-lbl">Objetivo final</div>
+        <div class="obj-final-text">${p.objetivo}</div>
+      </div>
+      <!-- Card header -->
       <div class="proj-card-hd">
         <div class="proj-accent" style="background:${cor};min-height:56px"></div>
         <div class="proj-card-meta">
           <div class="proj-card-type" style="color:${cor}">Longo prazo · ${p.prazo?fDateS(p.prazo):"sem prazo"}</div>
           <div class="proj-card-name">${p.name}</div>
-          <div class="proj-card-desc">${p.objetivo}</div>
-          <div class="proj-card-footer">
-            <span class="proj-badge" style="background:${cor}18;color:${cor}">${focosAtivos.length} focos ativos</span>
-            ${focosConcl.length?`<span class="proj-badge" style="background:rgba(52,199,89,.12);color:var(--fi-c)">${focosConcl.length} concluídos</span>`:""}
+          <div class="proj-card-footer" style="margin-top:4px">
+            <span class="proj-badge" style="background:${cor}18;color:${cor}">${focosAtivos.length} foco${focosAtivos.length!==1?"s":""} ativo${focosAtivos.length!==1?"s":""}</span>
+            ${focosConcl.length?`<span class="proj-badge" style="background:rgba(52,199,89,.12);color:var(--fi-c)">${focosConcl.length} concluído${focosConcl.length!==1?"s":""}</span>`:""}
+            ${hasBloqueio?`<span class="proj-badge" style="background:rgba(255,149,0,.15);color:var(--pr)">⚠ Bloqueio</span>`:""}
           </div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
           <div style="font-size:20px;font-weight:800;font-family:'DM Mono',monospace;color:${cor}">${prog.pct}%</div>
-          <button class="row-btn" data-edit-longo="${p.id}">Editar</button>
-          <button class="row-btn del" data-del-longo="${p.id}">Remover</button>
+          <div style="display:flex;gap:4px">
+            <button class="row-btn" data-edit-longo="${p.id}">Editar</button>
+            <button class="row-btn del" data-del-longo="${p.id}">×</button>
+          </div>
         </div>
       </div>
-      <div class="proj-prog-wrap">
+      <!-- Barra progresso -->
+      <div class="proj-prog-wrap" style="padding-bottom:8px">
         <div class="proj-prog-track"><div class="proj-prog-fill" style="width:${prog.pct}%;background:${cor}"></div></div>
         <div class="proj-prog-lbl"><span>${prog.done} de ${prog.total} focos concluídos</span></div>
       </div>
-      <div style="padding:0 20px 16px 36px">
-        <div style="font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Focos atuais</div>
-        ${(p.focos||[]).map(f=>`
-          <div class="obj-foco-row">
-            <div class="obj-foco-dot" style="background:${f.done?"var(--fi-c)":cor}"></div>
-            <div class="obj-foco-body">
-              <div class="obj-foco-text${f.done?' done-txt':''}">${f.texto}</div>
-            </div>
-            <button style="font-size:11px;padding:3px 8px;border-radius:8px;background:${f.done?"rgba(52,199,89,.1)":"rgba(0,0,0,.06)"};color:${f.done?"var(--fi-c)":"var(--tx2)"}" data-toggle-foco="${p.id}" data-foco-id="${f.id}">${f.done?"✓ Feito":"Concluir"}</button>
-            <button style="font-size:10px;padding:3px 7px;border-radius:7px;background:rgba(0,0,0,.05);color:var(--tx2)" data-del-foco="${p.id}" data-foco-id="${f.id}">×</button>
-          </div>`).join("")}
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <input class="f-input" style="margin-bottom:0;font-size:12px;padding:7px 11px" placeholder="Adicionar foco..." id="add-foco-${p.id}"/>
-          <button class="mod-btn mod-btn-solid" style="padding:7px 14px;font-size:12px" data-add-foco="${p.id}">+</button>
+      <!-- Foco atual em destaque -->
+      ${focoAtual?`
+      <div class="foco-atual-wrap">
+        <div class="foco-atual-banner">
+          <div class="foco-atual-lbl" style="color:${cor}">Foco agora</div>
+          <div class="foco-atual-text">${focoAtual.texto}</div>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <button style="font-size:11px;padding:4px 10px;border-radius:9px;background:${cor};color:#fff;font-weight:700" data-toggle-foco="${p.id}" data-foco-id="${focoAtual.id}">Concluir foco</button>
+            <button style="font-size:11px;padding:4px 10px;border-radius:9px;background:rgba(0,0,0,.06);color:var(--tx2)" data-del-foco="${p.id}" data-foco-id="${focoAtual.id}">Remover</button>
+          </div>
         </div>
+      </div>`:`<div style="padding:0 20px 8px;font-size:12px;color:var(--tx2);font-style:italic">Todos os focos concluídos! Adicione novos abaixo.</div>`}
+      <!-- Focos restantes colapsáveis -->
+      ${focosRest.length||focosConcl.length?`
+      <div class="focos-restantes">
+        <div class="focos-rest-lbl" id="fl-toggle-${p.id}">
+          <span style="color:${cor}">▸</span>
+          ${focosRest.length} foco${focosRest.length!==1?"s":""} aguardando${focosConcl.length?` · ${focosConcl.length} concluído${focosConcl.length!==1?"s":""}`:""} — ver todos
+        </div>
+        <div class="focos-rest-body" id="fl-body-${p.id}">
+          ${focosRest.map(f=>`
+            <div class="obj-foco-row">
+              <div class="obj-foco-dot" style="background:${cor};opacity:.4"></div>
+              <div class="obj-foco-body"><div class="obj-foco-text">${f.texto}</div></div>
+              <button style="font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(0,0,0,.05);color:var(--tx2)" data-del-foco="${p.id}" data-foco-id="${f.id}">×</button>
+            </div>`).join("")}
+          ${focosConcl.map(f=>`
+            <div class="obj-foco-row" style="opacity:.5">
+              <div class="obj-foco-dot" style="background:var(--fi-c)"></div>
+              <div class="obj-foco-body"><div class="obj-foco-text done-txt">${f.texto}</div></div>
+              <button style="font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(52,199,89,.1);color:var(--fi-c)" data-toggle-foco="${p.id}" data-foco-id="${f.id}">↩</button>
+            </div>`).join("")}
+        </div>
+      </div>`:""}
+      <!-- Adicionar foco inline -->
+      <div style="padding:0 20px 14px;display:flex;gap:8px">
+        <input class="f-input" style="margin-bottom:0;font-size:12px;padding:7px 11px;flex:1" placeholder="Adicionar foco..." id="add-foco-${p.id}"/>
+        <button class="mod-btn mod-btn-solid" style="padding:7px 14px;font-size:12px" data-add-foco="${p.id}">+</button>
+      </div>
+      <!-- Bloqueio -->
+      <div class="bloqueio-wrap${hasBloqueio?"":" empty"}" id="bloqueio-wrap-${p.id}" style="margin:0 20px 16px">
+        <div class="bloqueio-hd" id="bloqueio-hd-${p.id}">
+          <div class="bloqueio-dot"></div>
+          <div class="bloqueio-lbl">${hasBloqueio?"Bloqueio: "+p.bloqueio:"Registrar bloqueio (opcional)"}</div>
+          <span style="font-size:10px;color:${hasBloqueio?"var(--pr)":"var(--tx2)"}">editar</span>
+        </div>
+        <textarea class="bloqueio-input" id="bloqueio-input-${p.id}" rows="2" placeholder="O que está impedindo o avanço deste projeto?">${p.bloqueio||""}</textarea>
       </div>
     </div>`;
   }).join(""):'<div class="w" style="text-align:center;padding:48px;color:var(--tx2)"><div style="font-size:32px;margin-bottom:12px">🎯</div><div style="font-size:14px;font-weight:600;margin-bottom:6px">Nenhum projeto de longo prazo</div><div style="font-size:12px">Projetos maiores, com objetivos finais e focos momentâneos.</div></div>';
   document.getElementById("proj-content").innerHTML=html;
-  // Events longo
+  // Toggle focos colapsados
+  document.getElementById("proj-content").querySelectorAll("[id^='fl-toggle-']").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const id=btn.id.replace("fl-toggle-","");
+      const body=document.getElementById("fl-body-"+id);
+      if(!body)return;
+      body.classList.toggle("open");
+      const arrow=btn.querySelector("span");
+      if(arrow)arrow.textContent=body.classList.contains("open")?"▾":"▸";
+    });
+  });
+  // Toggle bloqueio
+  document.getElementById("proj-content").querySelectorAll("[id^='bloqueio-hd-']").forEach(hd=>{
+    hd.addEventListener("click",()=>{
+      const id=hd.id.replace("bloqueio-hd-","");
+      const wrap=document.getElementById("bloqueio-wrap-"+id);
+      const inp=document.getElementById("bloqueio-input-"+id);
+      if(!wrap||!inp)return;
+      wrap.classList.toggle("open");
+      if(wrap.classList.contains("open"))inp.focus();
+    });
+  });
+  // Salvar bloqueio ao perder foco
+  document.getElementById("proj-content").querySelectorAll("[id^='bloqueio-input-']").forEach(inp=>{
+    inp.addEventListener("blur",()=>{
+      const id=+inp.id.replace("bloqueio-input-","");
+      const p=PROJ.longo.find(x=>x.id===id);if(!p)return;
+      pushUndo("proj");p.bloqueio=inp.value.trim();
+      saveProj(PROJ);renderProjLongo();
+    });
+  });
+  // Toggle foco
   document.getElementById("proj-content").querySelectorAll("[data-toggle-foco]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const pid=+btn.dataset.toggleFoco,fid=+btn.dataset.focoId;
       const p=PROJ.longo.find(x=>x.id===pid);if(!p)return;
       const f=p.focos.find(x=>x.id===fid);if(!f)return;
-      pushUndo("proj");f.done=!f.done;saveProj(PROJ);renderProjLongo();
+      pushUndo("proj");f.done=!f.done;saveProj(PROJ);
+      if(f.done)showToast("Foco concluído! 🎯");
+      renderProjLongo();
     });
   });
   document.getElementById("proj-content").querySelectorAll("[data-del-foco]").forEach(btn=>{
@@ -1843,60 +2023,104 @@ function renderProjCurto(){
   const html=PROJ.curto.length?PROJ.curto.map(p=>{
     const prog=projProgresso(p);const cor=p.color||"#FF9500";
     const isHoras=p.tipo==="horas";
-    const stepsHtml=isHoras?`
-      <div style="padding:4px 20px 16px 36px">
-        <div style="display:flex;align-items:center;gap:14px">
+    const proximaAcao=p.proximaAcao||"";
+    // Timeline para steps
+    const stepsBody=isHoras?`
+      <div class="tl-wrap">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:4px">
           <div style="flex:1">
             <div class="proj-prog-track" style="height:10px"><div class="proj-prog-fill" style="width:${prog.pct}%;background:${cor}"></div></div>
-            <div class="proj-prog-lbl" style="margin-top:4px"><span>${prog.done}h de ${prog.total}h concluídas</span><span style="color:${cor}">${prog.pct}%</span></div>
+            <div class="proj-prog-lbl" style="margin-top:4px"><span>${prog.done}h de ${prog.total}h</span><span style="color:${cor}">${prog.pct}%</span></div>
           </div>
-          <div style="display:flex;gap:6px;align-items:center">
-            <button style="padding:5px 10px;border-radius:9px;background:rgba(0,0,0,.07);font-size:11px;font-weight:700;color:var(--tx2)" data-horas-dec="${p.id}">−1h</button>
-            <button style="padding:5px 10px;border-radius:9px;background:${cor};color:#fff;font-size:11px;font-weight:700" data-horas-inc="${p.id}">+1h</button>
+          <div style="display:flex;gap:6px">
+            <button style="padding:6px 12px;border-radius:10px;background:rgba(0,0,0,.07);font-size:12px;font-weight:700;color:var(--tx2)" data-horas-dec="${p.id}">−1h</button>
+            <button style="padding:6px 12px;border-radius:10px;background:${cor};color:#fff;font-size:12px;font-weight:700" data-horas-inc="${p.id}">+1h</button>
           </div>
         </div>
       </div>`:`
-      <div style="padding:0 20px 16px 36px">
-        ${(p.steps||[]).map(s=>`
-          <div class="step-row">
-            <button class="step-chk${s.done?" done":""}" data-toggle-step="${p.id}" data-step-id="${s.id}"></button>
-            <div class="step-text${s.done?" done-txt":""}">${s.texto}</div>
-            <button style="font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(0,0,0,.05);color:var(--tx2)" data-del-step="${p.id}" data-step-id="${s.id}">×</button>
-          </div>`).join("")}
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <input class="f-input" style="margin-bottom:0;font-size:12px;padding:7px 11px" placeholder="Adicionar step..." id="add-step-${p.id}"/>
+      <div class="tl-wrap">
+        ${(p.steps||[]).map((s,idx,arr)=>{
+          const prevDone=idx>0?arr[idx-1].done:true;
+          const isActive=!s.done&&prevDone;
+          const isFuture=!s.done&&!prevDone;
+          const isLast=idx===arr.length-1;
+          const nodeClass=s.done?"done":isActive?"active":"future";
+          const textClass=s.done?"tl-text-done":isActive?"tl-text-active":"tl-text-future";
+          return`<div class="tl-step-row">
+            <div class="tl-left">
+              <div class="tl-node ${nodeClass}" style="${isActive?"box-shadow:0 0 0 4px "+cor+"30;background:"+cor:""}${s.done?"background:var(--fi-c)":""}"></div>
+              ${!isLast?`<div class="tl-connector${s.done?" done":""}" style="${s.done?"background:var(--fi-c)":""}"></div>`:""}
+            </div>
+            <div class="tl-content" style="${isLast?"padding-bottom:4px":""}">
+              ${isActive?`<div class="tl-active-badge" style="background:${cor}18;color:${cor}">Agora</div>`:""}
+              <div class="${textClass}" style="${isActive?"color:var(--tx)":""}">${s.texto}</div>
+              ${isActive?`<div style="display:flex;gap:5px;margin-top:6px">
+                <button style="font-size:11px;padding:4px 10px;border-radius:9px;background:${cor};color:#fff;font-weight:700" data-toggle-step="${p.id}" data-step-id="${s.id}">Concluir step</button>
+                <button style="font-size:10px;padding:4px 8px;border-radius:9px;background:rgba(0,0,0,.06);color:var(--tx2)" data-del-step="${p.id}" data-step-id="${s.id}">×</button>
+              </div>`:`<div style="display:flex;gap:4px;margin-top:2px;opacity:${s.done?1:0.4}">
+                ${s.done?`<button style="font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(52,199,89,.1);color:var(--fi-c)" data-toggle-step="${p.id}" data-step-id="${s.id}">↩</button>`:""}
+                <button style="font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(0,0,0,.05);color:var(--tx2)" data-del-step="${p.id}" data-step-id="${s.id}">×</button>
+              </div>`}
+            </div>
+          </div>`;
+        }).join("")}
+        <div style="display:flex;gap:8px;margin-top:8px;padding-left:28px">
+          <input class="f-input" style="margin-bottom:0;font-size:12px;padding:7px 11px;flex:1" placeholder="Adicionar step..." id="add-step-${p.id}"/>
           <button class="mod-btn mod-btn-solid" style="padding:7px 14px;font-size:12px" data-add-step="${p.id}">+</button>
         </div>
       </div>`;
     return`<div class="proj-card">
+      <!-- Próxima ação editável -->
+      <div class="proxima-acao-wrap">
+        <div class="proxima-acao-lbl" style="color:${cor}">Próxima ação</div>
+        <input class="proxima-acao-input" id="pa-input-${p.id}" value="${proximaAcao.replace(/"/g,'&quot;')}" placeholder="O que você precisa fazer agora neste projeto?" data-pa-id="${p.id}"/>
+      </div>
+      <!-- Card header -->
       <div class="proj-card-hd">
         <div class="proj-accent" style="background:${cor};min-height:48px"></div>
         <div class="proj-card-meta">
           <div class="proj-card-type" style="color:${cor}">Curto prazo · ${isHoras?"meta de horas":"steps sequenciais"}</div>
           <div class="proj-card-name">${p.name}</div>
           ${p.desc?`<div class="proj-card-desc">${p.desc}</div>`:""}
-          <div class="proj-card-footer">
+          <div class="proj-card-footer" style="margin-top:4px">
             <span class="proj-badge" style="background:${cor}18;color:${cor}">${prog.pct}% concluído</span>
             ${prog.pct===100?`<span class="proj-badge" style="background:rgba(52,199,89,.12);color:var(--fi-c)">✓ Finalizado</span>`:""}
           </div>
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
           <div style="font-size:20px;font-weight:800;font-family:'DM Mono',monospace;color:${cor}">${prog.pct}%</div>
-          <button class="row-btn" data-edit-curto="${p.id}">Editar</button>
-          <button class="row-btn del" data-del-curto="${p.id}">Remover</button>
+          <div style="display:flex;gap:4px">
+            <button class="row-btn" data-edit-curto="${p.id}">Editar</button>
+            <button class="row-btn del" data-del-curto="${p.id}">×</button>
+          </div>
         </div>
       </div>
-      ${stepsHtml}
+      ${stepsBody}
     </div>`;
   }).join(""):'<div class="w" style="text-align:center;padding:48px;color:var(--tx2)"><div style="font-size:32px;margin-bottom:12px">⚡</div><div style="font-size:14px;font-weight:600;margin-bottom:6px">Nenhum projeto de curto prazo</div><div style="font-size:12px">Atividades pontuais com steps ou meta de horas.</div></div>';
   document.getElementById("proj-content").innerHTML=html;
-  // Steps events
+  // Salvar próxima ação
+  document.getElementById("proj-content").querySelectorAll("[data-pa-id]").forEach(inp=>{
+    inp.addEventListener("blur",()=>{
+      const p=PROJ.curto.find(x=>x.id===+inp.dataset.paId);if(!p)return;
+      p.proximaAcao=inp.value.trim();saveProj(PROJ);
+    });
+    inp.addEventListener("keydown",e=>{if(e.key==="Enter")inp.blur();});
+  });
+  // Steps toggle
   document.getElementById("proj-content").querySelectorAll("[data-toggle-step]").forEach(btn=>{
     btn.addEventListener("click",()=>{
       const pid=+btn.dataset.toggleStep,sid=+btn.dataset.stepId;
       const p=PROJ.curto.find(x=>x.id===pid);if(!p)return;
       const s=p.steps.find(x=>x.id===sid);if(!s)return;
-      pushUndo("proj");s.done=!s.done;saveProj(PROJ);renderProjCurto();
+      pushUndo("proj");s.done=!s.done;
+      // auto update proxima acao
+      if(s.done){const next=(p.steps||[]).find(x=>!x.done);p.proximaAcao=next?.texto||"";}
+      saveProj(PROJ);
+      const prog=projProgresso(p);
+      if(prog.pct===100)showToast("Projeto concluído! 🎉");
+      else if(s.done)showToast("Step concluído ✓");
+      renderProjCurto();
     });
   });
   document.getElementById("proj-content").querySelectorAll("[data-del-step]").forEach(btn=>{
