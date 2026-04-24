@@ -431,6 +431,115 @@ select.exp-form-input{appearance:none;cursor:pointer}
 .dd-item.danger{color:var(--ha)}
 .dd-sep{height:1px;background:rgba(0,0,0,.06);margin:4px 0}
 .dd-lbl{padding:4px 10px 2px;font-size:9px;font-weight:700;color:rgba(0,0,0,.2);text-transform:uppercase;letter-spacing:.06em}
+
+/* ═══════════ V6 NEW STYLES ═══════════ */
+/* APORTES */
+.aporte-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bd);font-size:12px}
+.aporte-row:last-child{border-bottom:none}
+.aporte-date{font-family:"DM Mono",monospace;font-size:11px;color:var(--tx2);width:78px;flex-shrink:0}
+.aporte-obs{flex:1;font-size:11px;color:var(--tx2)}
+.aporte-val{font-family:"DM Mono",monospace;font-weight:700;flex-shrink:0}
+.aporte-del{font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(255,45,85,.08);color:var(--ha);opacity:0;transition:opacity .12s;margin-left:4px}
+.aporte-row:hover .aporte-del{opacity:1}
+.fund-meta-pill{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-right:4px;margin-top:4px}
+/* BANK GASTOS OVERVIEW */
+.bank-spend-card{background:#fff;border-radius:var(--r);padding:20px;margin-bottom:12px;overflow:hidden}
+.bank-spend-hd{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.bank-logo-big{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.bank-spend-total{font-size:24px;font-weight:800;font-family:"DM Mono",monospace;letter-spacing:-.02em}
+.bank-cat-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--bd)}
+.bank-cat-row:last-child{border-bottom:none}
+.bank-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bank-cat-name{font-size:12px;flex:1}
+.bank-cat-bar-wrap{width:80px;height:5px;background:rgba(0,0,0,.07);border-radius:3px;overflow:hidden}
+.bank-cat-bar-fill{height:100%;border-radius:3px}
+.bank-cat-val{font-size:11px;font-weight:700;font-family:"DM Mono",monospace;width:70px;text-align:right}
+/* LONGO PRAZO DASHBOARD */
+.lp-dash{background:#fff;border-radius:var(--r);margin-bottom:16px;overflow:hidden}
+.lp-dash-hero{padding:22px 24px 18px;background:linear-gradient(135deg,#f8f8fb 0%,#fff 100%)}
+.lp-dash-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.lp-dash-name{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px;line-height:1.2}
+.lp-dash-obj{font-size:12px;color:var(--tx2);margin-bottom:14px;line-height:1.5;max-width:560px}
+.lp-kpis{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--bd)}
+.lp-kpi{padding:14px 18px;border-right:1px solid var(--bd);text-align:center}
+.lp-kpi:last-child{border-right:none}
+.lp-kpi-lbl{font-size:9px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.lp-kpi-val{font-size:22px;font-weight:800;font-family:"DM Mono",monospace;letter-spacing:-.02em}
+.lp-prog-hero{padding:16px 24px;border-top:1px solid var(--bd);background:rgba(0,0,0,.015)}
+.lp-prog-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px}
+.lp-prog-track{height:10px;background:rgba(0,0,0,.08);border-radius:5px;overflow:hidden}
+.lp-prog-fill{height:100%;border-radius:5px;transition:width .5s}
+/* WORKFLOW TIMELINE */
+.wf-section{padding:20px 24px;border-top:1px solid var(--bd)}
+.wf-title{font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.wf-step{display:flex;align-items:flex-start;gap:12px;position:relative;padding-bottom:4px}
+.wf-step:not(:last-child)::before{content:"";position:absolute;left:11px;top:26px;width:2px;bottom:-4px;background:rgba(0,0,0,.08)}
+.wf-step.wf-done::before{background:var(--fi-c)}
+.wf-node{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;color:#fff;transition:all .15s;margin-top:2px}
+.wf-content{flex:1;padding:10px 14px;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:background .1s}
+.wf-content:hover{background:rgba(0,0,0,.03)}
+.wf-content.wf-done-card{background:rgba(52,199,89,.05)}
+.wf-content.wf-active-card{border-left:3px solid transparent}
+.wf-step-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.wf-step-title.done-txt{text-decoration:line-through;color:var(--tx2)}
+.wf-step-meta{font-size:11px;color:var(--tx2);display:flex;gap:8px;flex-wrap:wrap}
+.wf-add-row{display:flex;gap:8px;padding:0 24px 18px}
+.bloqueio-section{padding:0 24px 18px}
+/* CURTO PRAZO — step título, legenda, tempo */
+.step-heading{font-size:13px;font-weight:700;line-height:1.3;margin-bottom:1px}
+.step-heading.done-txt{text-decoration:line-through;color:var(--tx2)}
+.step-caption{font-size:11px;color:var(--tx2);line-height:1.4;margin-bottom:3px}
+.step-time-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:7px;background:rgba(0,0,0,.06);color:var(--tx2);font-family:"DM Mono",monospace}
+/* PLANEJAMENTO DE DIAS */
+.plan-nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.plan-nav-btns{display:flex;gap:6px}
+.plan-nav-btn{width:32px;height:32px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.08);cursor:pointer;transition:all .15s;border:none;font-family:inherit}
+.plan-nav-btn:hover{background:var(--tx);color:#fff}
+.plan-date-center{text-align:center}
+.plan-date-main{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.plan-date-dow{font-size:12px;color:var(--tx2);margin-top:1px}
+.plan-summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.plan-sum-chip{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:11px;font-weight:700;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.07)}
+.plan-sum-dot{width:7px;height:7px;border-radius:50%}
+.plan-areas-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:1100px){.plan-areas-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.plan-areas-grid{grid-template-columns:repeat(2,1fr)}}
+.area-col{background:#fff;border-radius:var(--r);overflow:hidden;min-height:160px;transition:box-shadow .15s}
+.area-col.drag-over{box-shadow:0 0 0 2px var(--cl);background:rgba(91,140,219,.03)!important}
+.area-col-hd{padding:12px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd)}
+.area-col-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.area-col-name{font-size:12px;font-weight:700;flex:1}
+.area-col-cnt{font-size:10px;font-weight:700;font-family:"DM Mono",monospace;color:var(--tx2)}
+.plan-task-card{padding:10px 14px;border-bottom:1px solid var(--bd);cursor:grab;transition:background .1s;position:relative;user-select:none}
+.plan-task-card:last-child{border-bottom:none}
+.plan-task-card:hover{background:rgba(0,0,0,.02)}
+.plan-task-card.dragging{opacity:.4;background:rgba(91,140,219,.05)}
+.plan-task-top{display:flex;align-items:flex-start;gap:6px}
+.plan-task-chk{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(0,0,0,.15);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .15s}
+.plan-task-chk.done{background:var(--fi-c);border-color:var(--fi-c)}
+.plan-task-chk.done::after{content:"";display:block;width:3px;height:6px;border:2px solid #fff;border-top:none;border-left:none;transform:rotate(45deg) translate(-0.5px,-1px)}
+.plan-task-title{font-size:12px;font-weight:600;flex:1;line-height:1.3}
+.plan-task-title.done-txt{text-decoration:line-through;color:var(--tx2)}
+.plan-task-prio{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.plan-task-desc{font-size:11px;color:var(--tx2);margin:2px 0 3px 22px;line-height:1.4}
+.plan-task-meta{display:flex;gap:6px;margin-left:22px;flex-wrap:wrap}
+.plan-task-time{font-size:10px;font-family:"DM Mono",monospace;color:var(--tx2);background:rgba(0,0,0,.05);padding:1px 6px;border-radius:6px}
+.plan-task-del{position:absolute;top:8px;right:10px;font-size:10px;padding:2px 7px;border-radius:7px;background:rgba(255,45,85,.08);color:var(--ha);opacity:0;transition:opacity .12s}
+.plan-task-card:hover .plan-task-del{opacity:1}
+.area-col-add{padding:8px 14px;display:flex;gap:6px;border-top:1px solid var(--bd);background:rgba(0,0,0,.01)}
+.area-col-add-input{flex:1;border:none;background:transparent;font-size:11px;font-family:"DM Sans",sans-serif;color:var(--tx)}
+.area-col-add-input::placeholder{color:rgba(0,0,0,.25)}
+.area-col-add-btn{font-size:16px;color:var(--tx2);cursor:pointer;transition:color .1s;padding:0 2px;border:none;background:none;font-family:inherit}
+.area-col-add-btn:hover{color:var(--tx)}
+/* PRIO COLORS */
+.prio-alta{background:rgba(255,45,85,.8)}
+.prio-media{background:rgba(255,149,0,.8)}
+.prio-baixa{background:rgba(52,199,89,.8)}
+/* PLAN TASK MODAL */
+.pt-prio-btn{flex:1;padding:8px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid rgba(0,0,0,.08);background:transparent;color:var(--tx2);font-family:"DM Sans",sans-serif;transition:all .15s}
+.pt-prio-btn.sel-alta{border-color:rgba(255,45,85,.4);background:rgba(255,45,85,.07);color:var(--ha)}
+.pt-prio-btn.sel-media{border-color:rgba(255,149,0,.4);background:rgba(255,149,0,.07);color:var(--pr)}
+.pt-prio-btn.sel-baixa{border-color:rgba(52,199,89,.4);background:rgba(52,199,89,.07);color:var(--fi-c)}
 </style>
 </head>
 <body>
@@ -442,6 +551,7 @@ select.exp-form-input{appearance:none;cursor:pointer}
     <div class="tn" data-page="posicionamento">Posicionamento</div>
     <div class="tn" data-page="financas">Finanças</div>
     <div class="tn" data-page="projetos">Projetos</div>
+    <div class="tn" data-page="planejamento">Planejamento</div>
     <div class="tn" data-page="habitos">Hábitos</div>
   </div>
   <div class="top-right">
@@ -517,6 +627,79 @@ select.exp-form-input{appearance:none;cursor:pointer}
       <div class="itab" data-ptab="focos">Focos do Momento</div>
     </div>
     <div id="proj-content"></div>
+  </div>
+</div>
+<div class="page" id="page-planejamento">
+  <div class="mod-page">
+    <div class="mod-hd">
+      <div>
+        <div class="mod-hd-num">Módulo 06</div>
+        <div class="mod-hd-title">Planejamento de Dias</div>
+        <div class="mod-hd-sub">tarefas por área · foco diário</div>
+      </div>
+      <div class="mod-actions" id="plan-hd-actions"></div>
+    </div>
+    <div id="plan-content"></div>
+  </div>
+</div>
+<!-- MODAL APORTE -->
+<div class="modal-bg hidden" id="aporte-modal">
+  <div class="modal-card wide">
+    <div class="modal-title">Aportes — <span id="aporte-fund-name" style="color:var(--cl)"></span></div>
+    <div id="aporte-list" style="max-height:200px;overflow-y:auto;margin-bottom:10px"></div>
+    <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px">Registrar novo aporte</div>
+    <div class="f-grid">
+      <div><label class="f-lbl">Valor R$*</label><input class="f-input" id="aporte-valor" type="number" step="0.01" min="0" placeholder="500.00"/></div>
+      <div><label class="f-lbl">Data*</label><input class="f-input" id="aporte-data" type="date"/></div>
+    </div>
+    <label class="f-lbl">Observação</label>
+    <input class="f-input" id="aporte-obs" type="text" placeholder="Ex: Aporte mensal regular"/>
+    <div class="f-callout f-callout-err hidden" id="aporte-err"></div>
+    <div class="f-row">
+      <button class="f-btn f-btn-cancel" id="aporte-cancel">Fechar</button>
+      <button class="f-btn f-btn-save" id="aporte-save">Registrar aporte</button>
+    </div>
+  </div>
+</div>
+<!-- MODAL TAREFA PLANEJAMENTO -->
+<div class="modal-bg hidden" id="plan-task-modal">
+  <div class="modal-card wide">
+    <div class="modal-title" id="plan-task-modal-title">Nova tarefa</div>
+    <label class="f-lbl">Título*</label>
+    <input class="f-input" id="pt-title" type="text" placeholder="O que precisa ser feito?"/>
+    <label class="f-lbl">Descrição / detalhes</label>
+    <textarea class="f-input" id="pt-desc" rows="2" placeholder="Contexto, links, referências..." style="resize:vertical;margin-bottom:0"></textarea>
+    <div class="f-grid">
+      <div><label class="f-lbl">Área da vida</label>
+        <select class="f-input" id="pt-area">
+          <option value="cl">Clínica</option>
+          <option value="po">Posicionamento</option>
+          <option value="fi">Finanças</option>
+          <option value="pr">Projetos</option>
+          <option value="ha">Hábitos</option>
+        </select>
+      </div>
+      <div>
+        <label class="f-lbl">Tempo estimado</label>
+        <div style="display:flex;gap:6px;align-items:center">
+          <input class="f-input" id="pt-horas" type="number" min="0" max="23" value="0" style="width:64px;padding:9px 8px;text-align:center;margin-bottom:0;font-family:'DM Mono',monospace"/>
+          <span style="font-size:12px;color:var(--tx2);font-weight:600;flex-shrink:0">h</span>
+          <input class="f-input" id="pt-mins" type="number" min="0" max="59" step="5" value="0" style="width:64px;padding:9px 8px;text-align:center;margin-bottom:0;font-family:'DM Mono',monospace"/>
+          <span style="font-size:12px;color:var(--tx2);font-weight:600;flex-shrink:0">min</span>
+        </div>
+      </div>
+    </div>
+    <label class="f-lbl">Prioridade</label>
+    <div style="display:flex;gap:6px;margin-bottom:4px">
+      <button class="pt-prio-btn" data-prio="alta" id="pt-prio-alta">Alta</button>
+      <button class="pt-prio-btn" data-prio="media" id="pt-prio-media">Média</button>
+      <button class="pt-prio-btn" data-prio="baixa" id="pt-prio-baixa">Baixa</button>
+    </div>
+    <div class="f-callout f-callout-err hidden" id="pt-err"></div>
+    <div class="f-row">
+      <button class="f-btn f-btn-cancel" id="pt-cancel">Cancelar</button>
+      <button class="f-btn f-btn-save" id="pt-save">Salvar tarefa</button>
+    </div>
   </div>
 </div>
 <div class="page" id="page-placeholder">
@@ -666,6 +849,10 @@ select.exp-form-input{appearance:none;cursor:pointer}
       <div><label class="f-lbl">Cor do fundo</label><input class="f-input" id="fund-color-input" type="color" style="height:42px;padding:4px 8px;cursor:pointer"/></div>
     </div>
     <div><label class="f-lbl">Link Mais Retorno</label><input class="f-input" id="fund-mr-input" type="url" placeholder="https://maisretorno.com.br/..."/></div>
+    <div class="f-grid">
+      <div><label class="f-lbl">Carência (dias)</label><input class="f-input" id="fund-carencia-input" type="number" min="0" placeholder="0 = sem carência"/></div>
+      <div><label class="f-lbl">Taxa de adm. % a.a.</label><input class="f-input" id="fund-taxa-input" type="number" step="0.01" min="0" placeholder="Ex: 0.50"/></div>
+    </div>
     <div class="f-callout f-callout-err hidden" id="fund-err"></div>
     <div class="f-row">
       <button class="f-btn f-btn-cancel" id="fund-cancel">Cancelar</button>
@@ -694,6 +881,10 @@ select.exp-form-input{appearance:none;cursor:pointer}
       <div><label class="f-lbl">Cor</label><input class="f-input" id="fn-color" type="color" value="#5B8CDB" style="height:42px;padding:4px 8px;cursor:pointer"/></div>
     </div>
     <div><label class="f-lbl">Link Mais Retorno</label><input class="f-input" id="fn-mr" type="url" placeholder="https://maisretorno.com.br/..."/></div>
+    <div class="f-grid">
+      <div><label class="f-lbl">Carência (dias)</label><input class="f-input" id="fn-carencia" type="number" min="0" placeholder="0 = sem carência"/></div>
+      <div><label class="f-lbl">Taxa de adm. % a.a.</label><input class="f-input" id="fn-taxa" type="number" step="0.01" min="0" placeholder="Ex: 0.50"/></div>
+    </div>
     <div class="f-callout f-callout-err hidden" id="fn-err"></div>
     <div class="f-row">
       <button class="f-btn f-btn-cancel" id="fn-cancel">Cancelar</button>
@@ -814,8 +1005,19 @@ select.exp-form-input{appearance:none;cursor:pointer}
       <label class="f-lbl" style="margin-top:14px">Steps <span style="color:var(--tx2);font-weight:400">(adicione as etapas)</span></label>
       <div id="pcm-steps-list" style="margin-bottom:6px"></div>
       <div style="display:flex;gap:8px;margin-bottom:4px">
-        <input class="f-input" id="pcm-step-input" type="text" placeholder="Ex: Adaptar bio do LinkedIn..." style="margin-bottom:0"/>
+        <input class="f-input" id="pcm-step-input" type="text" placeholder="Título do step..." style="margin-bottom:0;flex:1"/>
         <button class="mod-btn mod-btn-solid" id="pcm-step-add" style="white-space:nowrap;padding:9px 14px">+</button>
+      </div>
+      <div class="f-grid" style="margin-bottom:4px">
+        <div><label class="f-lbl">Legenda do step</label><input class="f-input" id="pcm-step-caption" type="text" placeholder="Descrição do que deve ser feito..."/></div>
+        <div><label class="f-lbl">Tempo estimado</label>
+          <div style="display:flex;gap:5px;align-items:center">
+            <input class="f-input" id="pcm-step-horas" type="number" min="0" max="99" value="0" style="width:56px;padding:9px 8px;text-align:center;margin-bottom:0;font-family:'DM Mono',monospace"/>
+            <span style="font-size:12px;color:var(--tx2);font-weight:600">h</span>
+            <input class="f-input" id="pcm-step-mins" type="number" min="0" max="59" step="5" value="0" style="width:56px;padding:9px 8px;text-align:center;margin-bottom:0;font-family:'DM Mono',monospace"/>
+            <span style="font-size:12px;color:var(--tx2);font-weight:600">min</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="f-callout f-callout-err hidden" id="pcm-err"></div>
@@ -898,11 +1100,11 @@ function buildFinSeed(){
   const doff=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);};
   return{
     fundos:[
-      {id:1,name:"CDB Next",bank:"next",principal:15000,startDate:"2024-03-15",saldo:15842.30,historico:[{date:doff(4),saldo:15820},{date:doff(3),saldo:15830},{date:doff(2),saldo:15835},{date:doff(1),saldo:15840},{date:doff(0),saldo:15842.30}],color:"#FF5C35",mrUrl:"https://maisretorno.com.br/busca?termo=CDB+Next"},
-      {id:2,name:"Tesouro Direto",bank:"bb",principal:25000,startDate:"2023-01-10",saldo:27650,historico:[{date:doff(4),saldo:27600},{date:doff(3),saldo:27615},{date:doff(2),saldo:27630},{date:doff(1),saldo:27643},{date:doff(0),saldo:27650}],color:"#F0C020",mrUrl:"https://maisretorno.com.br/busca?termo=Tesouro+Direto"},
-      {id:3,name:"CDB BB",bank:"bb",principal:10000,startDate:"2024-08-20",saldo:10520.80,historico:[{date:doff(2),saldo:10510},{date:doff(1),saldo:10516},{date:doff(0),saldo:10520.80}],color:"#34C759",mrUrl:"https://maisretorno.com.br/busca?termo=CDB+Banco+Brasil"},
-      {id:4,name:"LCI Next",bank:"next",principal:8000,startDate:"2025-02-01",saldo:8198.40,historico:[{date:doff(1),saldo:8192},{date:doff(0),saldo:8198.40}],color:"#7C6FCD",mrUrl:"https://maisretorno.com.br/busca?termo=LCI+Next"},
-      {id:5,name:"CDB Amex",bank:"amex",principal:5000,startDate:"2025-09-15",saldo:5062.10,historico:[{date:doff(0),saldo:5062.10}],color:"#006FCF",mrUrl:"https://maisretorno.com.br/busca?termo=CDB+Amex"},
+      {id:1,name:"CDB Next",bank:"next",principal:15000,startDate:"2024-03-15",saldo:15842.30,carencia:0,taxaAdm:0,aportes:[{id:1,data:"2024-03-15",valor:15000,obs:"Aporte inicial"}],historico:[{date:doff(4),saldo:15820},{date:doff(3),saldo:15830},{date:doff(2),saldo:15835},{date:doff(1),saldo:15840},{date:doff(0),saldo:15842.30}],color:"#FF5C35",mrUrl:"https://maisretorno.com.br/busca?termo=CDB+Next"},
+      {id:2,name:"Tesouro Direto",bank:"bb",principal:25000,startDate:"2023-01-10",saldo:27650,carencia:180,taxaAdm:0,aportes:[{id:1,data:"2023-01-10",valor:20000,obs:"Aporte inicial"},{id:2,data:"2023-06-01",valor:5000,obs:"Reforço"}],historico:[{date:doff(4),saldo:27600},{date:doff(3),saldo:27615},{date:doff(2),saldo:27630},{date:doff(1),saldo:27643},{date:doff(0),saldo:27650}],color:"#F0C020",mrUrl:"https://maisretorno.com.br/busca?termo=Tesouro+Direto"},
+      {id:3,name:"CDB BB",bank:"bb",principal:10000,startDate:"2024-08-20",saldo:10520.80,carencia:90,taxaAdm:0,aportes:[{id:1,data:"2024-08-20",valor:10000,obs:"Aporte inicial"}],historico:[{date:doff(2),saldo:10510},{date:doff(1),saldo:10516},{date:doff(0),saldo:10520.80}],color:"#34C759",mrUrl:"https://maisretorno.com.br/busca?termo=CDB+Banco+Brasil"},
+      {id:4,name:"LCI Next",bank:"next",principal:8000,startDate:"2025-02-01",saldo:8198.40,carencia:360,taxaAdm:0,aportes:[{id:1,data:"2025-02-01",valor:8000,obs:"Aporte inicial"}],historico:[{date:doff(1),saldo:8192},{date:doff(0),saldo:8198.40}],color:"#7C6FCD",mrUrl:"https://maisretorno.com.br/busca?termo=LCI+Next"},
+      {id:5,name:"CDB Amex",bank:"amex",principal:5000,startDate:"2025-09-15",saldo:5062.10,carencia:0,taxaAdm:0.5,aportes:[{id:1,data:"2025-09-15",valor:5000,obs:"Aporte inicial"}],historico:[{date:doff(0),saldo:5062.10}],color:"#006FCF",mrUrl:"https://maisretorno.com.br/busca?termo=CDB+Amex"},
     ],
     gastos:[
       {id:1,desc:"Almoco no restaurante",bank:"next",amount:48.90,category:"Alimenta\u00e7\u00e3o",date:doff(1)},
@@ -936,7 +1138,7 @@ function saveProj(p){try{localStorage.setItem(PROJ_KEY,JSON.stringify(p));}catch
 function buildProjSeed(){
   return{
     longo:[
-      {id:1,name:"Curitiba Hard Punchers — Psicologia do Esporte",objetivo:"Publicar um artigo que retrate todo o trabalho realizado com a equipe, formando atletas e seres humanos melhores.",prazo:"2026-12-31",color:"#5B8CDB",bloqueio:"",focos:[
+      {id:1,name:"Curitiba Hard Punchers — Psicologia do Esporte",objetivo:"Publicar um artigo que retrate todo o trabalho realizado com a equipe, formando atletas e seres humanos melhores.",prazo:"2026-12-31",startDate:"2026-01-01",color:"#5B8CDB",bloqueio:"",focos:[
         {id:1,texto:"Fazer os atletas novos aderirem aos métodos de treinamento",done:false},
         {id:2,texto:"Investigar o que a equipe técnica observa em relação ao potencial de cada atleta",done:false},
         {id:3,texto:"Alinhar atuação junto à equipe técnica",done:false},
@@ -944,12 +1146,12 @@ function buildProjSeed(){
     ],
     curto:[
       {id:10,name:"Reposicionamento no LinkedIn",desc:"Atualização completa do perfil e estratégia de conteúdo",tipo:"steps",color:"#FF9500",proximaAcao:"Adaptar outros aspectos do perfil",steps:[
-        {id:1,texto:"Adaptação de termos da bio",done:true},
-        {id:2,texto:"Adaptação de descrição própria",done:true},
-        {id:3,texto:"Adaptação de outros aspectos do perfil",done:false},
-        {id:4,texto:"Fazer publicação alinhada ao novo posicionamento",done:false},
-        {id:5,texto:"Fazer publicação alinhada ao novo posicionamento 2",done:false},
-        {id:6,texto:"Buscar conexões alinhadas ao novo posicionamento",done:false},
+        {id:1,texto:"Adaptação de termos da bio",legenda:"Revisar headline, resumo e skills com foco em psicologia do esporte.",horas:0,mins:30,done:true},
+        {id:2,texto:"Adaptação de descrição própria",legenda:"Reescrever a seção 'Sobre' com linguagem do novo posicionamento.",horas:1,mins:0,done:true},
+        {id:3,texto:"Adaptação de outros aspectos do perfil",legenda:"Atualizar experiências, certificações e foto de capa.",horas:0,mins:45,done:false},
+        {id:4,texto:"Publicação alinhada ao novo posicionamento",legenda:"Criar post apresentando sua atuação com atletas. Use métricas e resultados.",horas:1,mins:30,done:false},
+        {id:5,texto:"Segunda publicação de posicionamento",legenda:"Compartilhar insight de caso clínico (preservando anonimato) com foco em performance.",horas:1,mins:0,done:false},
+        {id:6,texto:"Buscar conexões alinhadas",legenda:"Adicionar pelo menos 20 profissionais de esporte e atletas.",horas:0,mins:20,done:false},
       ]},
     ],
     focos:[
@@ -975,7 +1177,23 @@ let homeTasks=[
 ];
 let nHId=10,radarVals={cl:6,po:5,fi:7,pr:4,ha:8},habitDays={ha:[1,2,3,5],fi:[0,1,2,3]};
 let chatHistory=[],pendingExp=null;
-let PAGE="home",ITAB="sessoes",FITAB="visao",PTAB="visao";
+let PAGE="home",ITAB="sessoes",FITAB="visao",PTAB="visao",PLAN_DATE=new Date().toISOString().slice(0,10);
+const PLAN_KEY="hub_pessoal_plan_v1";
+function loadPlan(){try{const r=localStorage.getItem(PLAN_KEY);if(r)return JSON.parse(r);}catch{}return null;}
+function savePlan(p){try{localStorage.setItem(PLAN_KEY,JSON.stringify(p));}catch{}}
+function buildPlanSeed(){
+  const t=new Date().toISOString().slice(0,10);
+  return{tasks:[
+    {id:1,date:t,area:"cl",title:"Prontuário Hen.",desc:"Preencher prontuário da sessão de quarta.",horas:0,mins:30,prio:"alta",done:false},
+    {id:2,date:t,area:"cl",title:"Relatório Adri.",desc:"",horas:0,mins:45,prio:"alta",done:false},
+    {id:3,date:t,area:"fi",title:"Revisar planilha de gastos",desc:"",horas:0,mins:20,prio:"media",done:true},
+    {id:4,date:t,area:"ha",title:"Meditação 10min",desc:"",horas:0,mins:10,prio:"baixa",done:false},
+    {id:5,date:t,area:"po",title:"Atualizar LinkedIn",desc:"Finalizar nova bio e publicar primeiro post.",horas:1,mins:0,prio:"media",done:false},
+  ],nextId:10};
+}
+let PLAN=loadPlan()||buildPlanSeed();
+if(!loadPlan())savePlan(PLAN);
+let PT_EDIT_ID=null,PT_PRIO="alta",APORTE_FUND_ID=null;
 let FS="all",FP="all",SRCH="";
 let EDITING=null,QROOM=null,MTYPE="at";
 let CY=new Date().getFullYear(),CM=new Date().getMonth();
@@ -1069,11 +1287,11 @@ function setPage(p){
   PAGE=p;
   document.querySelectorAll(".tn").forEach(n=>n.classList.toggle("active",n.dataset.page===p));
   document.querySelectorAll(".page").forEach(pg=>pg.classList.remove("active"));
-  const map={home:"page-home",clinica:"page-clinica",financas:"page-financas",projetos:"page-projetos"};
+  const map={home:"page-home",clinica:"page-clinica",financas:"page-financas",projetos:"page-projetos",planejamento:"page-planejamento"};
   if(map[p]){document.getElementById(map[p]).classList.add("active");}
   else{
     document.getElementById("page-placeholder").classList.add("active");
-    const ar={posicionamento:{num:"02",title:"Posicionamento",sub:"Carreira e marca profissional"},habitos:{num:"05",title:"H\u00e1bitos",sub:"Rotinas e desenvolvimento"}};
+    const ar={posicionamento:{num:"02",title:"Posicionamento",sub:"Carreira e marca profissional"},habitos:{num:"05",title:"H\u00e1bitos",sub:"Rotinas e desenvolvimento"},planejamento:{num:"06",title:"Planejamento",sub:"Organização de dias e tarefas"}};
     const a=ar[p]||{num:"-",title:p,sub:""};
     document.getElementById("ph-num").textContent="M\u00f3dulo "+a.num;
     document.getElementById("ph-title").textContent=a.title;
@@ -1083,6 +1301,7 @@ function setPage(p){
   if(p==="clinica")renderClinica();
   if(p==="financas")renderFinancas();
   if(p==="projetos")renderProjetos();
+  if(p==="planejamento")renderPlanejamento();
 }
 
 // HOME RENDER
@@ -1304,6 +1523,17 @@ function renderFinancas(){
   else if(FITAB==="compromissos")renderCompromissos();
   else if(FITAB==="projecao")renderProjecao();
 }
+function calcCarencia(f){
+  if(!f.carencia||f.carencia<=0)return null;
+  const startMs=new Date(f.startDate).getTime();
+  const endMs=startMs+f.carencia*86400000;
+  const now=Date.now();
+  if(now>=endMs)return null;
+  const daysLeft=Math.ceil((endMs-now)/86400000);
+  const endDate=new Date(endMs);
+  const ms=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+  return`até ${endDate.getDate()} ${ms[endDate.getMonth()]} (${daysLeft}d)`;
+}
 function renderFundos(){
   const tS=FIN.fundos.reduce((a,f)=>a+f.saldo,0);
   const tP=FIN.fundos.reduce((a,f)=>a+f.principal,0);
@@ -1334,7 +1564,15 @@ function renderFundos(){
         <div style="font-size:18px;font-weight:800;font-family:'DM Mono',monospace;color:${f.color}">${fBRL(calc.resgatavel)}</div>
       </div>
       <div style="padding-left:12px;display:flex;align-items:flex-end;gap:3px;height:28px;margin-bottom:8px">${bars}</div>
-      <button class="cl-add-btn" style="margin-left:12px;font-size:11px" data-fid="${f.id}">Editar / Atualizar</button>
+      <div style="padding-left:12px;display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
+        ${calcCarencia(f)?`<span class="fund-meta-pill" style="background:rgba(255,149,0,.1);color:var(--pr)">⏳ Carência: ${calcCarencia(f)}</span>`:""}
+        ${f.taxaAdm?`<span class="fund-meta-pill" style="background:rgba(255,45,85,.08);color:var(--ha)">Taxa: ${f.taxaAdm}% a.a.</span>`:""}
+        ${(f.aportes||[]).length>1?`<span class="fund-meta-pill" style="background:rgba(91,140,219,.1);color:var(--cl)">${(f.aportes||[]).length} aportes</span>`:""}
+      </div>
+      <div style="padding-left:12px;display:flex;gap:6px;flex-wrap:wrap">
+        <button class="cl-add-btn" style="font-size:11px" data-fid="${f.id}">Editar</button>
+        <button class="cl-add-btn" style="font-size:11px;background:var(--fi-c)" data-aporte="${f.id}">+ Aporte</button>
+      </div>
       ${f.mrUrl?`<a class="mr-link" href="${f.mrUrl}" target="_blank" rel="noopener"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 9L9 1M9 1H4M9 1v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mais Retorno</a>`:""}
     </div>`;
   });
@@ -1451,8 +1689,34 @@ function renderGastos(){
         <div style="padding:0 18px">${catHtml||'<div style="padding:20px;text-align:center;font-size:13px;color:var(--tx2)">Nenhum gasto.</div>'}</div>
       </div>
       <div class="w" style="margin-bottom:12px;padding:0">
-        <div style="padding:14px 18px;border-bottom:1px solid var(--bd)"><div style="font-size:13px;font-weight:700">Por cartão · ${periodLabels[GASTOS_PERIOD]||""}</div></div>
-        <div style="padding:14px 18px"><div class="bank-split">${bankSplit||'<div style="font-size:12px;color:var(--tx2)">Nenhum gasto.</div>'}</div></div>
+        <div style="padding:14px 18px;border-bottom:1px solid var(--bd)"><div style="font-size:13px;font-weight:700">Por banco · ${periodLabels[GASTOS_PERIOD]||""}</div></div>
+        <div style="padding:14px 18px">
+          ${Object.keys(BN).map(bank=>{
+            const bGastos=filtered.filter(g=>g.bank===bank);
+            if(!bGastos.length)return"";
+            const bTotal=bGastos.reduce((a,g)=>a+g.amount,0);
+            const bCats={};bGastos.forEach(g=>{bCats[g.category]=(bCats[g.category]||0)+g.amount;});
+            const bCatMax=Math.max(...Object.values(bCats),1);
+            const catRows=Object.entries(bCats).sort((a,b)=>b[1]-a[1]).map(([cat,val])=>`
+              <div class="bank-cat-row">
+                <div class="bank-cat-dot" style="background:${CC[cat]||"#888"}"></div>
+                <div class="bank-cat-name">${cat}</div>
+                <div class="bank-cat-bar-wrap"><div class="bank-cat-bar-fill" style="width:${Math.round((val/bCatMax)*100)}%;background:${CC[cat]||"#888"}"></div></div>
+                <div class="bank-cat-val" style="color:${CC[cat]||"#888"}">${fBRL(val)}</div>
+              </div>`).join("");
+            return`<div style="margin-bottom:12px;padding:14px;border:1.5px solid ${BC[bank]}22;border-radius:16px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+                <div class="bank-logo-big" style="background:${BC[bank]}">${BN[bank][0]}</div>
+                <div>
+                  <div style="font-size:13px;font-weight:800;color:${BC[bank]}">${BN[bank]}</div>
+                  <div style="font-size:11px;color:var(--tx2)">${bGastos.length} transaç${bGastos.length===1?"ão":"ões"}</div>
+                </div>
+                <div style="margin-left:auto;font-size:18px;font-weight:800;font-family:'DM Mono',monospace;color:${BC[bank]}">${fBRL(bTotal)}</div>
+              </div>
+              ${catRows}
+            </div>`;
+          }).join("")||'<div style="font-size:12px;color:var(--tx2)">Nenhum gasto.</div>'}
+        </div>
       </div>
       <div class="w dark">
         <div class="w-lbl">Total ${periodLabels[GASTOS_PERIOD]||""}</div>
@@ -1867,37 +2131,54 @@ function renderProjLongo(){
     const focoAtual=focosAtivos[0]||null;
     const focosRest=focosAtivos.slice(1);
     const hasBloqueio=p.bloqueio&&p.bloqueio.trim();
-    return`<div class="proj-card">
-      <!-- Header com objetivo fixo -->
-      <div class="obj-final-strip">
-        <div class="obj-final-lbl">Objetivo final</div>
-        <div class="obj-final-text">${p.objetivo}</div>
-      </div>
-      <!-- Card header -->
-      <div class="proj-card-hd">
-        <div class="proj-accent" style="background:${cor};min-height:56px"></div>
-        <div class="proj-card-meta">
-          <div class="proj-card-type" style="color:${cor}">Longo prazo · ${p.prazo?fDateS(p.prazo):"sem prazo"}</div>
-          <div class="proj-card-name">${p.name}</div>
-          <div class="proj-card-footer" style="margin-top:4px">
-            <span class="proj-badge" style="background:${cor}18;color:${cor}">${focosAtivos.length} foco${focosAtivos.length!==1?"s":""} ativo${focosAtivos.length!==1?"s":""}</span>
-            ${focosConcl.length?`<span class="proj-badge" style="background:rgba(52,199,89,.12);color:var(--fi-c)">${focosConcl.length} concluído${focosConcl.length!==1?"s":""}</span>`:""}
-            ${hasBloqueio?`<span class="proj-badge" style="background:rgba(255,149,0,.15);color:var(--pr)">⚠ Bloqueio</span>`:""}
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
-          <div style="font-size:20px;font-weight:800;font-family:'DM Mono',monospace;color:${cor}">${prog.pct}%</div>
-          <div style="display:flex;gap:4px">
+    const diasDecorridos=Math.max(0,Math.floor((Date.now()-new Date(p.startDate||p.prazo||Date.now()).getTime())/86400000));
+    const diasRestantes=p.prazo?Math.max(0,Math.floor((new Date(p.prazo).getTime()-Date.now())/86400000)):null;
+    return`<div class="lp-dash">
+      <!-- Hero: nome + objetivo -->
+      <div class="lp-dash-hero" style="border-left:5px solid ${cor}">
+        <div class="lp-dash-type" style="color:${cor}">PROJETO DE LONGO PRAZO · ${p.prazo?fDateS(p.prazo):"sem prazo definido"}</div>
+        <div class="lp-dash-name">${p.name}</div>
+        <div class="lp-dash-obj">${p.objetivo}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="proj-badge" style="background:${cor}18;color:${cor}">${focosAtivos.length} foco${focosAtivos.length!==1?"s":""} ativo${focosAtivos.length!==1?"s":""}</span>
+          ${focosConcl.length?`<span class="proj-badge" style="background:rgba(52,199,89,.12);color:var(--fi-c)">✓ ${focosConcl.length} concluído${focosConcl.length!==1?"s":""}</span>`:""}
+          ${hasBloqueio?`<span class="proj-badge" style="background:rgba(255,149,0,.15);color:var(--pr)">⚠ Bloqueio ativo</span>`:""}
+          <div style="margin-left:auto;display:flex;gap:6px">
             <button class="row-btn" data-edit-longo="${p.id}">Editar</button>
             <button class="row-btn del" data-del-longo="${p.id}">×</button>
           </div>
         </div>
       </div>
-      <!-- Barra progresso -->
-      <div class="proj-prog-wrap" style="padding-bottom:8px">
-        <div class="proj-prog-track"><div class="proj-prog-fill" style="width:${prog.pct}%;background:${cor}"></div></div>
-        <div class="proj-prog-lbl"><span>${prog.done} de ${prog.total} focos concluídos</span></div>
+      <!-- KPI bar -->
+      <div class="lp-kpis">
+        <div class="lp-kpi">
+          <div class="lp-kpi-lbl">Conclusão</div>
+          <div class="lp-kpi-val" style="color:${cor}">${prog.pct}<span style="font-size:13px;font-weight:500;color:var(--tx2)">%</span></div>
+        </div>
+        <div class="lp-kpi">
+          <div class="lp-kpi-lbl">Focos concluídos</div>
+          <div class="lp-kpi-val">${prog.done}<span style="font-size:13px;font-weight:500;color:var(--tx2)">/${prog.total}</span></div>
+        </div>
+        ${diasRestantes!==null?`<div class="lp-kpi">
+          <div class="lp-kpi-lbl">Dias restantes</div>
+          <div class="lp-kpi-val" style="color:${diasRestantes<30?"var(--ha)":"var(--tx)"}">${diasRestantes}</div>
+        </div>`:`<div class="lp-kpi"><div class="lp-kpi-lbl">Prazo</div><div class="lp-kpi-val" style="font-size:14px;color:var(--tx2)">—</div></div>`}
+        <div class="lp-kpi">
+          <div class="lp-kpi-lbl">Status</div>
+          <div style="font-size:13px;font-weight:700;margin-top:4px;color:${hasBloqueio?"var(--pr)":prog.pct===100?"var(--fi-c)":"var(--tx)"}">${hasBloqueio?"Bloqueado":prog.pct===100?"✓ Concluído":focosAtivos.length?"Em progresso":"Sem focos"}</div>
+        </div>
       </div>
+      <!-- Progress bar -->
+      <div class="lp-prog-hero">
+        <div class="lp-prog-label">
+          <span style="font-size:12px;font-weight:700">Progresso geral</span>
+          <span style="font-size:12px;font-family:'DM Mono',monospace;color:${cor}">${prog.done} / ${prog.total} focos · ${prog.pct}%</span>
+        </div>
+        <div class="lp-prog-track"><div class="lp-prog-fill" style="width:${prog.pct}%;background:${cor}"></div></div>
+      </div>
+      <!-- Workflow timeline -->
+      <div class="wf-section">
+        <div class="wf-title">Workflow de focos</div>
       <!-- Foco atual em destaque -->
       ${focoAtual?`
       <div class="foco-atual-wrap">
@@ -1911,6 +2192,7 @@ function renderProjLongo(){
         </div>
       </div>`:`<div style="padding:0 20px 8px;font-size:12px;color:var(--tx2);font-style:italic">Todos os focos concluídos! Adicione novos abaixo.</div>`}
       <!-- Focos restantes colapsáveis -->
+      </div><!-- close wf-section -->
       ${focosRest.length||focosConcl.length?`
       <div class="focos-restantes">
         <div class="focos-rest-lbl" id="fl-toggle-${p.id}">
@@ -1932,13 +2214,15 @@ function renderProjLongo(){
             </div>`).join("")}
         </div>
       </div>`:""}
+      <!-- Workflow timeline title -->
       <!-- Adicionar foco inline -->
-      <div style="padding:0 20px 14px;display:flex;gap:8px">
+      <div class="wf-add-row">
         <input class="f-input" style="margin-bottom:0;font-size:12px;padding:7px 11px;flex:1" placeholder="Adicionar foco..." id="add-foco-${p.id}"/>
         <button class="mod-btn mod-btn-solid" style="padding:7px 14px;font-size:12px" data-add-foco="${p.id}">+</button>
       </div>
       <!-- Bloqueio -->
-      <div class="bloqueio-wrap${hasBloqueio?"":" empty"}" id="bloqueio-wrap-${p.id}" style="margin:0 20px 16px">
+      <div class="bloqueio-section">
+      <div class="bloqueio-wrap${hasBloqueio?"":" empty"}" id="bloqueio-wrap-${p.id}">
         <div class="bloqueio-hd" id="bloqueio-hd-${p.id}">
           <div class="bloqueio-dot"></div>
           <div class="bloqueio-lbl">${hasBloqueio?"Bloqueio: "+p.bloqueio:"Registrar bloqueio (opcional)"}</div>
@@ -2052,9 +2336,11 @@ function renderProjCurto(){
               ${!isLast?`<div class="tl-connector${s.done?" done":""}" style="${s.done?"background:var(--fi-c)":""}"></div>`:""}
             </div>
             <div class="tl-content" style="${isLast?"padding-bottom:4px":""}">
-              ${isActive?`<div class="tl-active-badge" style="background:${cor}18;color:${cor}">Agora</div>`:""}
-              <div class="${textClass}" style="${isActive?"color:var(--tx)":""}">${s.texto}</div>
-              ${isActive?`<div style="display:flex;gap:5px;margin-top:6px">
+              ${isActive?`<div class="tl-active-badge" style="background:${cor}18;color:${cor}">Em andamento</div>`:""}
+              <div class="step-heading${s.done?" done-txt":""}">${s.texto}</div>
+              ${s.legenda?`<div class="step-caption">${s.legenda}</div>`:""}
+              ${(s.horas||s.mins)?`<span class="step-time-badge">⏱ ${s.horas?s.horas+"h ":""}${s.mins?s.mins+"min":""}</span>`:""}
+              ${isActive?`<div style="display:flex;gap:5px;margin-top:8px">
                 <button style="font-size:11px;padding:4px 10px;border-radius:9px;background:${cor};color:#fff;font-weight:700" data-toggle-step="${p.id}" data-step-id="${s.id}">Concluir step</button>
                 <button style="font-size:10px;padding:4px 8px;border-radius:9px;background:rgba(0,0,0,.06);color:var(--tx2)" data-del-step="${p.id}" data-step-id="${s.id}">×</button>
               </div>`:`<div style="display:flex;gap:4px;margin-top:2px;opacity:${s.done?1:0.4}">
@@ -2136,7 +2422,13 @@ function renderProjCurto(){
       const inp=document.getElementById("add-step-"+pid);
       const texto=inp?.value.trim();if(!texto)return;
       const p=PROJ.curto.find(x=>x.id===pid);if(!p)return;
-      pushUndo("proj");p.steps.push({id:PROJ.nextId++,texto,done:false});
+      const caption=document.getElementById("pcm-step-caption")?.value.trim()||"";
+      const stepH=+document.getElementById("pcm-step-horas")?.value||0;
+      const stepM=+document.getElementById("pcm-step-mins")?.value||0;
+      pushUndo("proj");p.steps.push({id:PROJ.nextId++,texto,legenda:caption,horas:stepH,mins:stepM,done:false});
+      // clear fields
+      const cap=document.getElementById("pcm-step-caption");const sh=document.getElementById("pcm-step-horas");const sm=document.getElementById("pcm-step-mins");
+      if(cap)cap.value="";if(sh)sh.value=0;if(sm)sm.value=0;
       saveProj(PROJ);renderProjCurto();
     });
   });
@@ -2509,7 +2801,10 @@ function saveFundNewModal(){
   if(!principal||principal<=0){err.textContent="Informe o principal.";err.classList.remove("hidden");return;}
   if(!startDate){err.textContent="Informe a data.";err.classList.remove("hidden");return;}
   pushUndo("fin");
-  FIN.fundos.push({id:FIN.nextId++,name,bank,principal,startDate,saldo,historico:[{date:startDate,saldo}],color,mrUrl});
+  const carencia=+document.getElementById("fn-carencia")?.value||0;
+  const taxaAdm=parseFloat(document.getElementById("fn-taxa")?.value)||0;
+  const newId=FIN.nextId++;
+  FIN.fundos.push({id:newId,name,bank,principal,startDate,saldo,historico:[{date:startDate,saldo}],color,mrUrl,carencia,taxaAdm,aportes:[{id:FIN.nextId++,data:startDate,valor:principal,obs:"Aporte inicial"}]});
   saveFin(FIN);closeFundNewModal();renderFundos();showToast("Fundo criado!");
 }
 // MODAL RECEBER
@@ -2608,6 +2903,257 @@ function doUndo(){
   if(!undoStack.length)document.getElementById("undo-btn").classList.remove("has-history");
   showToast("Ação desfeita ↩");
 }
+
+// ═══════════════════════════════════════════
+// APORTES
+// ═══════════════════════════════════════════
+function openAporteModal(fid){
+  APORTE_FUND_ID=fid;
+  const f=FIN.fundos.find(x=>x.id===fid);if(!f)return;
+  document.getElementById("aporte-fund-name").textContent=f.name;
+  renderAporteList(f);
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById("aporte-data").value=today;
+  document.getElementById("aporte-valor").value="";
+  document.getElementById("aporte-obs").value="";
+  document.getElementById("aporte-err").classList.add("hidden");
+  document.getElementById("aporte-modal").classList.remove("hidden");
+}
+function renderAporteList(f){
+  const list=document.getElementById("aporte-list");
+  if(!f.aportes||!f.aportes.length){list.innerHTML='<div style="font-size:12px;color:var(--tx2);padding:8px 0">Nenhum aporte registrado.</div>';return;}
+  list.innerHTML=f.aportes.slice().reverse().map(a=>`<div class="aporte-row">
+    <span class="aporte-date">${a.data.split("-").reverse().join("/")}</span>
+    <span class="aporte-obs">${a.obs||""}</span>
+    <span class="aporte-val" style="color:var(--fi-c)">+${fBRL(a.valor)}</span>
+    <button class="aporte-del" data-del-aporte="${a.id}">×</button>
+  </div>`).join("");
+  list.querySelectorAll("[data-del-aporte]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const f2=FIN.fundos.find(x=>x.id===APORTE_FUND_ID);if(!f2)return;
+      const a=f2.aportes.find(x=>x.id===+btn.dataset.delAporte);if(!a)return;
+      if(!confirm("Remover este aporte?"))return;
+      f2.principal=Math.max(0,f2.principal-a.valor);
+      f2.aportes=f2.aportes.filter(x=>x.id!==a.id);
+      saveFin(FIN);renderAporteList(f2);renderFundos();showToast("Aporte removido");
+    });
+  });
+}
+function saveAporteModal(){
+  const f=FIN.fundos.find(x=>x.id===APORTE_FUND_ID);if(!f)return;
+  const valor=parseFloat(document.getElementById("aporte-valor").value)||0;
+  const data=document.getElementById("aporte-data").value;
+  const obs=document.getElementById("aporte-obs").value.trim();
+  const err=document.getElementById("aporte-err");
+  if(!valor||valor<=0){err.textContent="Informe um valor válido.";err.classList.remove("hidden");return;}
+  if(!data){err.textContent="Informe a data.";err.classList.remove("hidden");return;}
+  err.classList.add("hidden");
+  if(!f.aportes)f.aportes=[];
+  f.aportes.push({id:FIN.nextId++,data,valor,obs});
+  f.principal+=valor;
+  saveFin(FIN);
+  renderAporteList(f);
+  renderFundos();
+  showToast("Aporte registrado ✓");
+  document.getElementById("aporte-valor").value="";
+  document.getElementById("aporte-obs").value="";
+}
+function closeAporteModal(){document.getElementById("aporte-modal").classList.add("hidden");APORTE_FUND_ID=null;}
+
+// ═══════════════════════════════════════════
+// PLANEJAMENTO DE DIAS
+// ═══════════════════════════════════════════
+function planDateOffset(n){
+  const d=new Date(PLAN_DATE+"T12:00:00");d.setDate(d.getDate()+n);
+  PLAN_DATE=d.toISOString().slice(0,10);
+  renderPlanejamento();
+}
+function planFormatDate(iso){
+  const d=new Date(iso+"T12:00:00");
+  const dows=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
+  const ms=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+  return{dow:dows[d.getDay()],fmt:`${d.getDate()} de ${ms[d.getMonth()]} de ${d.getFullYear()}`};
+}
+function fmtTime(h,m){if(!h&&!m)return"";if(h&&m)return h+"h "+m+"min";if(h)return h+"h";return m+"min";}
+function renderPlanejamento(){
+  const ha=document.getElementById("plan-hd-actions");
+  if(ha)ha.innerHTML='<button class="mod-btn mod-btn-solid" id="btn-new-plan-task">+ Nova tarefa</button>';
+  document.getElementById("btn-new-plan-task")?.addEventListener("click",()=>openPlanTaskModal(null,null));
+  const dayTasks=PLAN.tasks.filter(t=>t.date===PLAN_DATE);
+  const {dow,fmt}=planFormatDate(PLAN_DATE);
+  const today=new Date().toISOString().slice(0,10);
+  const isToday=PLAN_DATE===today;
+  const totalTime=dayTasks.reduce((a,t)=>a+(t.horas*60+t.mins),0);
+  const doneTime=dayTasks.filter(t=>t.done).reduce((a,t)=>a+(t.horas*60+t.mins),0);
+  const totalH=Math.floor(totalTime/60),totalM=totalTime%60;
+  const doneCount=dayTasks.filter(t=>t.done).length;
+  // summary chips per area
+  const chips=Object.keys(AC).map(id=>{
+    const cnt=dayTasks.filter(t=>t.area===id).length;
+    if(!cnt)return"";
+    const dCnt=dayTasks.filter(t=>t.area===id&&t.done).length;
+    return`<div class="plan-sum-chip"><div class="plan-sum-dot" style="background:${AC[id]}"></div><span style="color:${AC[id]}">${AN[id]}</span><span style="color:var(--tx2)">${dCnt}/${cnt}</span></div>`;
+  }).join("");
+  document.getElementById("plan-content").innerHTML=`
+  <div class="plan-nav-row">
+    <div class="plan-nav-btns">
+      <button class="plan-nav-btn" id="plan-prev">←</button>
+      <button class="plan-nav-btn" id="plan-today" style="${isToday?"background:var(--tx);color:#fff":""}">Hoje</button>
+      <button class="plan-nav-btn" id="plan-next">→</button>
+    </div>
+    <div class="plan-date-center">
+      <div class="plan-date-main">${fmt}</div>
+      <div class="plan-date-dow">${dow}${isToday?" · hoje":""}</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:12px;color:var(--tx2)"><b style="color:var(--tx)">${doneCount}</b>/${dayTasks.length} tarefas${totalTime?` · <b style="color:var(--tx)">${fmtTime(totalH,totalM)}</b> estimados`:""}</span>
+    </div>
+  </div>
+  <div class="plan-summary">${chips||'<span style="font-size:12px;color:var(--tx2)">Nenhuma tarefa para este dia</span>'}</div>
+  <div class="plan-areas-grid" id="plan-areas-grid">
+    ${Object.keys(AC).map(id=>{
+      const tasks=dayTasks.filter(t=>t.area===id);
+      const taskCards=tasks.map(t=>{
+        const timeStr=fmtTime(t.horas,t.mins);
+        const prioClass=t.prio==="alta"?"prio-alta":t.prio==="media"?"prio-media":"prio-baixa";
+        return`<div class="plan-task-card" draggable="true" data-tid="${t.id}" data-area="${id}">
+          <div class="plan-task-top">
+            <div class="plan-task-chk${t.done?" done":""}" data-chk="${t.id}"></div>
+            <div class="plan-task-title${t.done?" done-txt":""}">${t.title}</div>
+            <div class="plan-task-prio ${prioClass}"></div>
+          </div>
+          ${t.desc?`<div class="plan-task-desc">${t.desc}</div>`:""}
+          <div class="plan-task-meta">
+            ${timeStr?`<span class="plan-task-time">⏱ ${timeStr}</span>`:""}
+          </div>
+          <button class="plan-task-del" data-del="${t.id}">×</button>
+        </div>`;
+      }).join("");
+      return`<div class="area-col" data-area="${id}" id="area-col-${id}">
+        <div class="area-col-hd">
+          <div class="area-col-dot" style="background:${AC[id]}"></div>
+          <div class="area-col-name" style="color:${AC[id]}">${AN[id]}</div>
+          <div class="area-col-cnt">${tasks.filter(t=>t.done).length}/${tasks.length}</div>
+        </div>
+        <div class="area-col-body" id="area-body-${id}">
+          ${taskCards}
+        </div>
+        <div class="area-col-add">
+          <input class="area-col-add-input" placeholder="Adicionar tarefa rápida..." id="quick-input-${id}" data-qa="${id}"/>
+          <button class="area-col-add-btn" data-qa-btn="${id}">+</button>
+        </div>
+      </div>`;
+    }).join("")}
+  </div>`;
+
+  // Nav events
+  document.getElementById("plan-prev")?.addEventListener("click",()=>planDateOffset(-1));
+  document.getElementById("plan-next")?.addEventListener("click",()=>planDateOffset(1));
+  document.getElementById("plan-today")?.addEventListener("click",()=>{PLAN_DATE=new Date().toISOString().slice(0,10);renderPlanejamento();});
+  // Check toggle
+  document.getElementById("plan-areas-grid").addEventListener("click",e=>{
+    const chk=e.target.closest("[data-chk]");
+    const del=e.target.closest("[data-del]");
+    if(chk){const t=PLAN.tasks.find(x=>x.id===+chk.dataset.chk);if(t){t.done=!t.done;savePlan(PLAN);renderPlanejamento();}return;}
+    if(del){PLAN.tasks=PLAN.tasks.filter(x=>x.id!==+del.dataset.del);savePlan(PLAN);renderPlanejamento();showToast("Tarefa removida");return;}
+    // click on card to edit
+    const card=e.target.closest(".plan-task-card");
+    if(card&&!e.target.closest("button")&&!e.target.closest("[data-chk]")){
+      openPlanTaskModal(+card.dataset.tid, card.dataset.area);
+    }
+  });
+  // Quick add
+  document.getElementById("plan-areas-grid").querySelectorAll("[data-qa-btn]").forEach(btn=>{
+    btn.addEventListener("click",()=>quickAddTask(btn.dataset.qaBtn));
+  });
+  document.getElementById("plan-areas-grid").querySelectorAll("[data-qa]").forEach(inp=>{
+    inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();quickAddTask(inp.dataset.qa);}});
+  });
+  // Drag and drop
+  initPlanDrag();
+}
+// planFormatDate defined above
+function quickAddTask(area){
+  const inp=document.getElementById("quick-input-"+area);
+  const txt=inp.value.trim();if(!txt)return;
+  PLAN.tasks.push({id:PLAN.nextId++,date:PLAN_DATE,area,title:txt,desc:"",horas:0,mins:0,prio:"media",done:false});
+  savePlan(PLAN);renderPlanejamento();showToast("Tarefa adicionada");
+}
+function initPlanDrag(){
+  let dragId=null,dragArea=null;
+  document.querySelectorAll(".plan-task-card").forEach(card=>{
+    card.addEventListener("dragstart",e=>{dragId=+card.dataset.tid;dragArea=card.dataset.area;card.classList.add("dragging");e.dataTransfer.effectAllowed="move";});
+    card.addEventListener("dragend",()=>{card.classList.remove("dragging");dragId=null;dragArea=null;});
+  });
+  document.querySelectorAll(".area-col").forEach(col=>{
+    col.addEventListener("dragover",e=>{e.preventDefault();col.classList.add("drag-over");e.dataTransfer.dropEffect="move";});
+    col.addEventListener("dragleave",()=>col.classList.remove("drag-over"));
+    col.addEventListener("drop",e=>{
+      e.preventDefault();col.classList.remove("drag-over");
+      if(!dragId)return;
+      const newArea=col.dataset.area;
+      const t=PLAN.tasks.find(x=>x.id===dragId);
+      if(t&&t.area!==newArea){t.area=newArea;savePlan(PLAN);renderPlanejamento();showToast("Tarefa movida para "+AN[newArea]);}
+    });
+  });
+}
+function openPlanTaskModal(id,area){
+  PT_EDIT_ID=id;
+  const modal=document.getElementById("plan-task-modal");
+  modal.classList.remove("hidden");
+  if(id){
+    const t=PLAN.tasks.find(x=>x.id===id);if(!t)return;
+    document.getElementById("plan-task-modal-title").textContent="Editar tarefa";
+    document.getElementById("pt-title").value=t.title;
+    document.getElementById("pt-desc").value=t.desc||"";
+    document.getElementById("pt-area").value=t.area;
+    document.getElementById("pt-horas").value=t.horas||0;
+    document.getElementById("pt-mins").value=t.mins||0;
+    PT_PRIO=t.prio||"media";
+  } else {
+    document.getElementById("plan-task-modal-title").textContent="Nova tarefa";
+    document.getElementById("pt-title").value="";
+    document.getElementById("pt-desc").value="";
+    document.getElementById("pt-area").value=area||"cl";
+    document.getElementById("pt-horas").value=0;
+    document.getElementById("pt-mins").value=0;
+    PT_PRIO="media";
+  }
+  updatePrioBtns();
+  document.getElementById("pt-err").classList.add("hidden");
+}
+function updatePrioBtns(){
+  ["alta","media","baixa"].forEach(p=>{
+    const btn=document.getElementById("pt-prio-"+p);if(!btn)return;
+    btn.className="pt-prio-btn"+(PT_PRIO===p?" sel-"+p:"");
+  });
+}
+function savePlanTaskModal(){
+  const title=document.getElementById("pt-title").value.trim();
+  const err=document.getElementById("pt-err");
+  if(!title){err.textContent="Informe o título.";err.classList.remove("hidden");return;}
+  err.classList.add("hidden");
+  const data={
+    area:document.getElementById("pt-area").value,
+    title,desc:document.getElementById("pt-desc").value.trim(),
+    horas:+document.getElementById("pt-horas").value||0,
+    mins:+document.getElementById("pt-mins").value||0,
+    prio:PT_PRIO,date:PLAN_DATE,
+  };
+  if(PT_EDIT_ID){
+    const t=PLAN.tasks.find(x=>x.id===PT_EDIT_ID);
+    if(t)Object.assign(t,data);
+    showToast("Tarefa atualizada ✓");
+  } else {
+    PLAN.tasks.push({id:PLAN.nextId++,done:false,...data});
+    showToast("Tarefa adicionada ✓");
+  }
+  savePlan(PLAN);
+  document.getElementById("plan-task-modal").classList.add("hidden");
+  renderPlanejamento();
+}
+function closePlanTaskModal(){document.getElementById("plan-task-modal").classList.add("hidden");PT_EDIT_ID=null;}
+
 // EXPORT/IMPORT
 function dl(name,content,mime){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([content],{type:mime}));a.download=name;a.click();URL.revokeObjectURL(a.href);}
 function exportCSV(){const rows=[["id","data","horario","paciente","supervisor","tipo","sala","prontuario","pendencias","relatorio","pesquisa","topicos_total","topicos_feitos"].join(",")];S.sessions.forEach(s=>{const e=v=>'"'+String(v||"").replace(/"/g,'""')+'"';const b=v=>v?"1":"0";rows.push([s.id,e(s.date),e(s.time),e(s.patient),e(s.supervisor),s.type,e(s.room),b(s.checks.prontuario),b(s.checks.pendencias),b(s.checks.relatorio),b(s.checks.pesquisa),s.topics?.total||0,s.topics?.done||0].join(","));});dl("clinica.csv",rows.join("\n"),"text/csv");showToast("CSV exportado");}
@@ -2634,7 +3180,14 @@ document.getElementById("proj-longo-modal")?.addEventListener("click",e=>{if(e.t
 document.getElementById("pcm-tipo")?.addEventListener("change",e=>toggleCurtoTipo(e.target.value));
 document.getElementById("pcm-step-add")?.addEventListener("click",()=>{
   const inp=document.getElementById("pcm-step-input");const txt=inp.value.trim();if(!txt)return;
-  _curtoStepsTemp.push({id:Date.now(),texto:txt,done:false});inp.value="";renderCurtoStepsTemp();
+  const legenda=document.getElementById("pcm-step-caption")?.value.trim()||"";
+  const sh=+document.getElementById("pcm-step-horas")?.value||0;
+  const sm=+document.getElementById("pcm-step-mins")?.value||0;
+  _curtoStepsTemp.push({id:Date.now(),texto:txt,legenda,horas:sh,mins:sm,done:false});
+  inp.value="";
+  const cap2=document.getElementById("pcm-step-caption");const sh2=document.getElementById("pcm-step-horas");const sm2=document.getElementById("pcm-step-mins");
+  if(cap2)cap2.value="";if(sh2)sh2.value=0;if(sm2)sm2.value=0;
+  renderCurtoStepsTemp();
 });
 document.getElementById("pcm-step-input")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();document.getElementById("pcm-step-add").click();}});
 document.getElementById("pcm-cancel")?.addEventListener("click",closeProjCurtoModal);
@@ -2669,6 +3222,17 @@ document.getElementById("fund-modal").addEventListener("click",e=>{if(e.target==
 document.getElementById("fn-cancel").addEventListener("click",closeFundNewModal);
 document.getElementById("fn-save").addEventListener("click",saveFundNewModal);
 document.getElementById("fund-new-modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeFundNewModal();});
+// APORTES
+document.getElementById("aporte-cancel").addEventListener("click",closeAporteModal);
+document.getElementById("aporte-save").addEventListener("click",saveAporteModal);
+document.getElementById("aporte-modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeAporteModal();});
+// PLAN TASK MODAL
+document.getElementById("pt-cancel").addEventListener("click",closePlanTaskModal);
+document.getElementById("pt-save").addEventListener("click",savePlanTaskModal);
+document.getElementById("plan-task-modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closePlanTaskModal();});
+document.querySelectorAll(".pt-prio-btn").forEach(btn=>btn.addEventListener("click",()=>{
+  PT_PRIO=btn.dataset.prio;updatePrioBtns();
+}));
 document.getElementById("rec-cancel").addEventListener("click",closeReceberModal);
 document.getElementById("rec-save").addEventListener("click",saveReceberModal);
 document.getElementById("receber-modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeReceberModal();});
@@ -2681,7 +3245,7 @@ document.getElementById("divida-modal").addEventListener("click",e=>{if(e.target
 document.getElementById("div-fixed").addEventListener("change",e=>{document.getElementById("div-fixed-fields").style.display=e.target.checked?"block":"none";});
 document.getElementById("task-cancel").addEventListener("click",()=>document.getElementById("task-modal").classList.add("hidden"));
 document.getElementById("task-add").addEventListener("click",()=>{const text=document.getElementById("task-text").value.trim();const area=document.getElementById("task-area").value;if(!text)return;homeTasks.push({id:nHId++,text,area,done:false,late:false});document.getElementById("task-text").value="";document.getElementById("task-modal").classList.add("hidden");renderHome();showToast("Tarefa adicionada");});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSessModal();closeRecurModal();closeRoomModal();closeFundModal();closeFundNewModal();closeFutModal();closeDivModal();closeReceberModal();closeProjLongoModal();closeProjCurtoModal();closeFocoModal();document.getElementById("task-modal").classList.add("hidden");document.getElementById("dropdown").classList.remove("open");}if((e.ctrlKey||e.metaKey)&&e.key==="z"){e.preventDefault();doUndo();}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSessModal();closeRecurModal();closeRoomModal();closeFundModal();closeFundNewModal();closeFutModal();closeDivModal();closeReceberModal();closeProjLongoModal();closeProjCurtoModal();closeFocoModal();closeAporteModal();closePlanTaskModal();document.getElementById("task-modal").classList.add("hidden");document.getElementById("dropdown").classList.remove("open");}if((e.ctrlKey||e.metaKey)&&e.key==="z"){e.preventDefault();doUndo();}});
 setPage("home");
 </script>
 </body>
