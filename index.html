@@ -559,6 +559,35 @@ select.exp-form-input{appearance:none;cursor:pointer}
 .ev-task-tile{position:relative;padding:8px 12px;border-radius:12px;border:1.5px solid rgba(0,0,0,.08);background:transparent;cursor:pointer;font-size:12px;font-weight:600;color:var(--tx2);transition:all .15s;user-select:none;display:flex;align-items:center;gap:6px;max-width:100%}
 .ev-task-tile.done{background:rgba(52,199,89,.09);border-color:rgba(52,199,89,.35);color:#1a7a36}
 .ev-task-tile input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.dm-sec-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px}
+.dm-field-lbl{font-size:11px;font-weight:700;color:var(--tx2);margin-bottom:6px;display:block}
+.m-scale-btn{padding:0;width:34px;height:34px;border-radius:10px;border:1.5px solid rgba(0,0,0,.1);background:transparent;font-size:11px;font-weight:700;color:var(--tx2);cursor:pointer;font-family:"DM Mono",monospace;transition:all .15s}
+.m-scale-btn.active{color:#fff;border-color:transparent;background:var(--cl)}
+/* Wizard */
+.dm-step{padding:32px 0 24px;display:flex;flex-direction:column;gap:0}
+.dm-step.hidden{display:none}
+.dm-step-header{margin-bottom:36px}
+.dm-step-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--tx2);margin-bottom:8px}
+.dm-step-title{font-size:28px;font-weight:800;color:var(--tx);letter-spacing:-.03em;line-height:1.1;margin-bottom:10px}
+.dm-step-desc{font-size:14px;color:var(--tx2);font-weight:500;line-height:1.5;max-width:480px}
+.dm-field-group{margin-bottom:28px}
+.dm-lbl{font-size:12px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;display:block}
+.dm-btn-row{display:flex;gap:8px;align-items:center}
+.dm-input{width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid rgba(0,0,0,.1);background:rgba(0,0,0,.02);font-size:15px;font-weight:500;color:var(--tx);font-family:"DM Sans",sans-serif;outline:none;box-sizing:border-box;transition:border-color .15s}
+.dm-input:focus{border-color:var(--cl);background:#fff}
+.dm-chip{padding:10px 18px;border-radius:12px;border:1.5px solid rgba(0,0,0,.09);background:transparent;font-size:13px;font-weight:600;color:var(--tx2);cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .15s;white-space:nowrap}
+.dm-chip.active{background:var(--cl);border-color:var(--cl);color:#fff}
+.dm-num-btn{width:42px;height:42px;border-radius:12px;border:1.5px solid rgba(0,0,0,.09);background:transparent;font-size:13px;font-weight:700;color:var(--tx2);cursor:pointer;font-family:"DM Mono",monospace;transition:all .15s;flex-shrink:0}
+.dm-num-btn.active{color:#fff;border-color:transparent}
+.dm-pill{padding:10px 20px;border-radius:99px;border:1.5px solid rgba(0,0,0,.09);background:transparent;font-size:13px;font-weight:600;color:var(--tx2);cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .15s;white-space:nowrap}
+.dm-pill.active{background:var(--cl);border-color:var(--cl);color:#fff}
+.dm-row-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.dm-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.dm-prog-dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,.12);flex-shrink:0;transition:all .25s}
+.dm-prog-dot.active{background:var(--cl);width:24px;border-radius:5px}
+.dm-prog-dot.done{background:var(--cl);opacity:.4}
+.dm-prog-line{flex:1;height:2px;background:rgba(0,0,0,.08);border-radius:1px;transition:background .25s}
+.dm-prog-line.done{background:var(--cl);opacity:.4}
 
 /* ── HÁBITOS ── */
 .hab-card{background:#fff;border-radius:var(--r);overflow:hidden;margin-bottom:10px;transition:box-shadow .15s}
@@ -6050,241 +6079,479 @@ document.getElementById('po-tabs')?.addEventListener('click', e => {
 
 console.log('[Posicionamento] Module loaded');
 </script>
-<!-- DAILY: MORNING CHECK-IN MODAL -->
-<div class="modal-bg hidden" id="daily-morning-modal">
-  <div class="modal-card wide" style="padding:0;overflow:hidden">
+<!-- DAILY: MORNING CHECK-IN WIZARD (full-screen) -->
+<div class="hidden" id="daily-morning-modal" style="position:fixed;inset:0;z-index:300;background:var(--bg);display:none;flex-direction:column;overflow:hidden">
 
-    <!-- Header -->
-    <div style="padding:22px 24px 16px;border-bottom:1px solid rgba(0,0,0,.06)">
-      <div style="font-size:17px;font-weight:800;color:var(--tx);letter-spacing:-.02em">☀️ Morning Check-in</div>
-      <div id="daily-m-header-date" style="font-size:12px;color:var(--tx2);margin-top:2px"></div>
+  <!-- Top bar: date + close -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 32px 0;flex-shrink:0">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tx2)">Morning Check-in</div>
+      <div id="daily-m-header-date" style="font-size:13px;font-weight:600;color:var(--tx);margin-top:2px"></div>
+    </div>
+    <button onclick="closeMorningCheckin()" style="width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.06);cursor:pointer;font-size:16px;color:var(--tx2);display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+
+  <!-- Progress bar -->
+  <div style="padding:20px 32px 0;flex-shrink:0">
+    <div style="display:flex;gap:6px;align-items:center">
+      <div class="dm-prog-dot active" id="dm-dot-1"></div>
+      <div class="dm-prog-line" id="dm-line-1"></div>
+      <div class="dm-prog-dot" id="dm-dot-2"></div>
+      <div class="dm-prog-line" id="dm-line-2"></div>
+      <div class="dm-prog-dot" id="dm-dot-3"></div>
+      <div class="dm-prog-line" id="dm-line-3"></div>
+      <div class="dm-prog-dot" id="dm-dot-4"></div>
+      <div class="dm-prog-line" id="dm-line-4"></div>
+      <div class="dm-prog-dot" id="dm-dot-5"></div>
+    </div>
+  </div>
+
+  <!-- Step content area (scrollable) -->
+  <div style="flex:1;overflow-y:auto;padding:0 32px 0">
+
+    <!-- STEP 1: Estado Biopsicossocial -->
+    <div class="dm-step" id="dm-step-1">
+      <div class="dm-step-header">
+        <div class="dm-step-num">01 / 05</div>
+        <div class="dm-step-title">Estado Biopsicossocial</div>
+        <div class="dm-step-desc">Como você acordou hoje? Registre seu estado físico, mental e emocional.</div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-row-2">
+          <div>
+            <div class="dm-lbl">🛌 Horas de sono</div>
+            <div id="daily-m-sleep-btns" class="dm-btn-row">
+              <button class="dm-chip" data-slp="5" onclick="dmSelect('sleep',5)">≤5h</button>
+              <button class="dm-chip" data-slp="6" onclick="dmSelect('sleep',6)">6h</button>
+              <button class="dm-chip" data-slp="7" onclick="dmSelect('sleep',7)">7h</button>
+              <button class="dm-chip" data-slp="8" onclick="dmSelect('sleep',8)">8h</button>
+              <button class="dm-chip" data-slp="9" onclick="dmSelect('sleep',9)">9h+</button>
+            </div>
+          </div>
+          <div>
+            <div class="dm-lbl">💤 Qualidade do sono</div>
+            <div id="daily-m-sleepq-btns" class="dm-btn-row">
+              <button class="dm-chip" data-slpq="1" onclick="dmSelect('sleepq',1)">1</button>
+              <button class="dm-chip" data-slpq="2" onclick="dmSelect('sleepq',2)">2</button>
+              <button class="dm-chip" data-slpq="3" onclick="dmSelect('sleepq',3)">3</button>
+              <button class="dm-chip" data-slpq="4" onclick="dmSelect('sleepq',4)">4</button>
+              <button class="dm-chip" data-slpq="5" onclick="dmSelect('sleepq',5)">5</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">⚡ Nível de energia (1–10)</div>
+        <div id="daily-energy-btns" class="dm-btn-row">
+          <button class="dm-num-btn" data-energy="1" onclick="dailySelectEnergy(1)">1</button>
+          <button class="dm-num-btn" data-energy="2" onclick="dailySelectEnergy(2)">2</button>
+          <button class="dm-num-btn" data-energy="3" onclick="dailySelectEnergy(3)">3</button>
+          <button class="dm-num-btn" data-energy="4" onclick="dailySelectEnergy(4)">4</button>
+          <button class="dm-num-btn" data-energy="5" onclick="dailySelectEnergy(5)">5</button>
+          <button class="dm-num-btn" data-energy="6" onclick="dailySelectEnergy(6)">6</button>
+          <button class="dm-num-btn" data-energy="7" onclick="dailySelectEnergy(7)">7</button>
+          <button class="dm-num-btn" data-energy="8" onclick="dailySelectEnergy(8)">8</button>
+          <button class="dm-num-btn" data-energy="9" onclick="dailySelectEnergy(9)">9</button>
+          <button class="dm-num-btn" data-energy="10" onclick="dailySelectEnergy(10)">10</button>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-row-2">
+          <div>
+            <div class="dm-lbl">🧠 Clareza mental (1–10)</div>
+            <div id="daily-m-clarity-btns" class="dm-btn-row" style="flex-wrap:wrap">
+              <button class="dm-num-btn" data-clarity="1" onclick="dailySelectClarity(1)">1</button>
+              <button class="dm-num-btn" data-clarity="2" onclick="dailySelectClarity(2)">2</button>
+              <button class="dm-num-btn" data-clarity="3" onclick="dailySelectClarity(3)">3</button>
+              <button class="dm-num-btn" data-clarity="4" onclick="dailySelectClarity(4)">4</button>
+              <button class="dm-num-btn" data-clarity="5" onclick="dailySelectClarity(5)">5</button>
+              <button class="dm-num-btn" data-clarity="6" onclick="dailySelectClarity(6)">6</button>
+              <button class="dm-num-btn" data-clarity="7" onclick="dailySelectClarity(7)">7</button>
+              <button class="dm-num-btn" data-clarity="8" onclick="dailySelectClarity(8)">8</button>
+              <button class="dm-num-btn" data-clarity="9" onclick="dailySelectClarity(9)">9</button>
+              <button class="dm-num-btn" data-clarity="10" onclick="dailySelectClarity(10)">10</button>
+            </div>
+          </div>
+          <div>
+            <div class="dm-lbl">💪 Corpo / físico (1–5)</div>
+            <div id="daily-m-body-btns" class="dm-btn-row">
+              <button class="dm-chip" data-body="1" onclick="dmSelect('body',1)">1</button>
+              <button class="dm-chip" data-body="2" onclick="dmSelect('body',2)">2</button>
+              <button class="dm-chip" data-body="3" onclick="dmSelect('body',3)">3</button>
+              <button class="dm-chip" data-body="4" onclick="dmSelect('body',4)">4</button>
+              <button class="dm-chip" data-body="5" onclick="dmSelect('body',5)">5</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">Estado geral</div>
+        <div id="daily-m-state-btns" class="dm-btn-row">
+          <button class="dm-pill" data-mstate="cansado" onclick="dailySelectMorningState('cansado')">😴 Cansado</button>
+          <button class="dm-pill" data-mstate="ok" onclick="dailySelectMorningState('ok')">😐 Ok</button>
+          <button class="dm-pill" data-mstate="disposto" onclick="dailySelectMorningState('disposto')">💪 Disposto</button>
+          <button class="dm-pill" data-mstate="excelente" onclick="dailySelectMorningState('excelente')">🚀 Excelente</button>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">Humor</div>
+        <div id="daily-m-mood-btns" class="dm-btn-row">
+          <button class="dm-pill" data-mood="triste" onclick="dmSelectMood('triste')">😔 Triste</button>
+          <button class="dm-pill" data-mood="neutro" onclick="dmSelectMood('neutro')">😐 Neutro</button>
+          <button class="dm-pill" data-mood="animado" onclick="dmSelectMood('animado')">😊 Animado</button>
+          <button class="dm-pill" data-mood="excelente" onclick="dmSelectMood('excelente')">🤩 Excelente</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Scrollable body -->
-    <div style="padding:20px 24px;overflow-y:auto;max-height:72vh;display:flex;flex-direction:column;gap:20px">
+    <!-- STEP 2: Tela e Comportamento Digital -->
+    <div class="dm-step hidden" id="dm-step-2">
+      <div class="dm-step-header">
+        <div class="dm-step-num">02 / 05</div>
+        <div class="dm-step-title">Tela e Comportamento Digital</div>
+        <div class="dm-step-desc">Refletir sobre o uso de tela ajuda a fazer escolhas melhores ao longo do dia.</div>
+      </div>
 
-      <!-- Section 1: Morning State -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">01 — Morning State</div>
-        <div style="background:rgba(0,0,0,.03);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px">
-
-          <div>
-            <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:8px">Energia ⚡</div>
-            <div id="daily-energy-btns" style="display:flex;gap:5px;flex-wrap:wrap">
-              <button class="ev-energy-btn" data-energy="1" onclick="dailySelectEnergy(1)">1</button>
-              <button class="ev-energy-btn" data-energy="2" onclick="dailySelectEnergy(2)">2</button>
-              <button class="ev-energy-btn" data-energy="3" onclick="dailySelectEnergy(3)">3</button>
-              <button class="ev-energy-btn" data-energy="4" onclick="dailySelectEnergy(4)">4</button>
-              <button class="ev-energy-btn" data-energy="5" onclick="dailySelectEnergy(5)">5</button>
-              <button class="ev-energy-btn" data-energy="6" onclick="dailySelectEnergy(6)">6</button>
-              <button class="ev-energy-btn" data-energy="7" onclick="dailySelectEnergy(7)">7</button>
-              <button class="ev-energy-btn" data-energy="8" onclick="dailySelectEnergy(8)">8</button>
-              <button class="ev-energy-btn" data-energy="9" onclick="dailySelectEnergy(9)">9</button>
-              <button class="ev-energy-btn" data-energy="10" onclick="dailySelectEnergy(10)">10</button>
-            </div>
-          </div>
-
-          <div>
-            <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:8px">Clareza mental 🧠</div>
-            <div id="daily-m-clarity-btns" style="display:flex;gap:5px;flex-wrap:wrap">
-              <button class="ev-energy-btn" data-clarity="1" onclick="dailySelectClarity(1)">1</button>
-              <button class="ev-energy-btn" data-clarity="2" onclick="dailySelectClarity(2)">2</button>
-              <button class="ev-energy-btn" data-clarity="3" onclick="dailySelectClarity(3)">3</button>
-              <button class="ev-energy-btn" data-clarity="4" onclick="dailySelectClarity(4)">4</button>
-              <button class="ev-energy-btn" data-clarity="5" onclick="dailySelectClarity(5)">5</button>
-              <button class="ev-energy-btn" data-clarity="6" onclick="dailySelectClarity(6)">6</button>
-              <button class="ev-energy-btn" data-clarity="7" onclick="dailySelectClarity(7)">7</button>
-              <button class="ev-energy-btn" data-clarity="8" onclick="dailySelectClarity(8)">8</button>
-              <button class="ev-energy-btn" data-clarity="9" onclick="dailySelectClarity(9)">9</button>
-              <button class="ev-energy-btn" data-clarity="10" onclick="dailySelectClarity(10)">10</button>
-            </div>
-          </div>
-
-          <div>
-            <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:8px">Estado geral</div>
-            <div id="daily-m-state-btns" style="display:flex;gap:6px">
-              <button class="ev-feel-btn" data-mstate="cansado" onclick="dailySelectMorningState('cansado')">😴 Cansado</button>
-              <button class="ev-feel-btn" data-mstate="ok" onclick="dailySelectMorningState('ok')">😐 Ok</button>
-              <button class="ev-feel-btn" data-mstate="disposto" onclick="dailySelectMorningState('disposto')">💪 Disposto</button>
-              <button class="ev-feel-btn" data-mstate="excelente" onclick="dailySelectMorningState('excelente')">🚀 Excelente</button>
-            </div>
-          </div>
-
+      <div class="dm-row-2">
+        <div class="dm-field-group">
+          <label class="dm-lbl">📱 Screen time ontem (horas)</label>
+          <input class="dm-input" id="daily-m-screen-time" type="number" step="0.5" min="0" max="24" placeholder="Ex: 4.5"/>
+        </div>
+        <div class="dm-field-group">
+          <label class="dm-lbl">App mais usado ontem</label>
+          <input class="dm-input" id="daily-m-main-app" type="text" placeholder="Ex: Instagram, YouTube..."/>
         </div>
       </div>
 
-      <!-- Section 2: Foco Principal -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">02 — Foco Principal</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">🎯 Foco principal do dia</label>
-            <input class="f-input" id="daily-m-focus" type="text" placeholder="O que é mais importante hoje?" style="margin:0"/>
-          </div>
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">➕ Foco secundário</label>
-            <input class="f-input" id="daily-m-secondary-focus" type="text" placeholder="Segundo objetivo do dia..." style="margin:0"/>
-          </div>
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">💡 Por que esse foco hoje?</label>
-            <input class="f-input" id="daily-m-focus-reason" type="text" placeholder="O motivo por trás da escolha..." style="margin:0"/>
-          </div>
-        </div>
+      <div class="dm-field-group">
+        <label class="dm-lbl" style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:600;color:var(--tx)">
+          <input type="checkbox" id="daily-m-reduce-screen" style="width:18px;height:18px;accent-color:var(--cl);flex-shrink:0"/>
+          Quero reduzir meu tempo de tela hoje
+        </label>
       </div>
 
-      <!-- Section 3: Snapshot Financeiro -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">03 — Snapshot Financeiro</div>
-        <div style="background:rgba(0,0,0,.03);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px">
-          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
-            <input type="checkbox" id="daily-m-finance" style="width:16px;height:16px;accent-color:var(--cl);flex-shrink:0"/>
-            <span style="font-size:12px;font-weight:600;color:var(--tx)">Atualizei os dados financeiros hoje</span>
-          </label>
-          <div class="f-grid" style="gap:8px">
-            <div>
-              <label class="f-lbl" style="margin-bottom:5px">Total investido (R$)</label>
-              <input class="f-input" id="daily-m-invested" type="number" step="0.01" min="0" placeholder="Opcional" style="margin:0"/>
-            </div>
-            <div>
-              <label class="f-lbl" style="margin-bottom:5px">Notas financeiras</label>
-              <input class="f-input" id="daily-m-fin-notes" type="text" placeholder="Ex: aporte feito, dólar..." style="margin:0"/>
-            </div>
-          </div>
-        </div>
+      <div class="dm-field-group">
+        <label class="dm-lbl">Como vou reduzir?</label>
+        <input class="dm-input" id="daily-m-screen-plan" type="text" placeholder="Ex: sem celular até as 10h, sem redes após o jantar..."/>
       </div>
-
-      <!-- Section 4: Intenção do Dia -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">04 — Intenção do Dia</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">✨ Intenção (uma frase)</label>
-            <input class="f-input" id="daily-m-intention" type="text" placeholder="Hoje eu escolho..." style="margin:0"/>
-          </div>
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">📝 Notas</label>
-            <textarea class="f-input" id="daily-m-notes" rows="2" placeholder="Qualquer coisa que queira registrar..." style="resize:none;margin:0"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="f-callout f-callout-err hidden" id="daily-m-err"></div>
     </div>
 
-    <!-- Footer -->
-    <div style="padding:16px 24px;border-top:1px solid rgba(0,0,0,.06);display:flex;gap:8px;justify-content:flex-end">
-      <button class="f-btn f-btn-cancel" id="daily-m-cancel">Cancelar</button>
-      <button class="f-btn f-btn-save" id="daily-m-save">Salvar check-in</button>
+    <!-- STEP 3: Snapshot Financeiro -->
+    <div class="dm-step hidden" id="dm-step-3">
+      <div class="dm-step-header">
+        <div class="dm-step-num">03 / 05</div>
+        <div class="dm-step-title">Snapshot Financeiro</div>
+        <div class="dm-step-desc">Registro histórico do momento — não altera seus dados financeiros.</div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">Cotações de hoje</div>
+        <div class="dm-row-3">
+          <div>
+            <label class="dm-lbl" style="font-size:11px">🇺🇸 Dólar (R$)</label>
+            <input class="dm-input" id="daily-m-usd" type="number" step="0.01" min="0" placeholder="5.82"/>
+          </div>
+          <div>
+            <label class="dm-lbl" style="font-size:11px">₿ Bitcoin (R$)</label>
+            <input class="dm-input" id="daily-m-btc" type="number" step="1" min="0" placeholder="580000"/>
+          </div>
+          <div>
+            <label class="dm-lbl" style="font-size:11px">📈 Ibovespa</label>
+            <input class="dm-input" id="daily-m-ibov" type="number" step="1" min="0" placeholder="131200"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">Fundos — saldo hoje</div>
+        <div id="daily-m-funds-list" style="display:flex;flex-direction:column;gap:10px;margin-top:8px"></div>
+      </div>
+
+      <div class="dm-field-group" style="border-top:1px solid rgba(0,0,0,.06);padding-top:20px">
+        <label class="dm-lbl" style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:600;color:var(--tx)">
+          <input type="checkbox" id="daily-m-finance" style="width:18px;height:18px;accent-color:var(--cl);flex-shrink:0"/>
+          Dados financeiros atualizados hoje
+        </label>
+      </div>
+
+      <div class="dm-row-2">
+        <div class="dm-field-group">
+          <label class="dm-lbl">Total investido (R$)</label>
+          <input class="dm-input" id="daily-m-invested" type="number" step="0.01" min="0" placeholder="Opcional"/>
+        </div>
+        <div class="dm-field-group">
+          <label class="dm-lbl">Notas financeiras</label>
+          <input class="dm-input" id="daily-m-fin-notes" type="text" placeholder="Ex: fiz aporte, dólar subiu..."/>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Objetivos e Foco -->
+    <div class="dm-step hidden" id="dm-step-4">
+      <div class="dm-step-header">
+        <div class="dm-step-num">04 / 05</div>
+        <div class="dm-step-title">Objetivos e Foco</div>
+        <div class="dm-step-desc">Reconecte-se com o que importa. O que você está construindo agora?</div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">🏆 Objetivo principal do momento</label>
+        <input class="dm-input" id="daily-m-current-goal" type="text" placeholder="Onde estou concentrando minha energia agora?"/>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">Áreas em foco esta semana</div>
+        <div id="daily-m-week-areas" class="dm-btn-row" style="flex-wrap:wrap;margin-top:10px">
+          <button class="dm-pill" data-warea="cl" onclick="dmToggleWeekArea('cl')">🏥 Clínica</button>
+          <button class="dm-pill" data-warea="po" onclick="dmToggleWeekArea('po')">📣 Posicionamento</button>
+          <button class="dm-pill" data-warea="fi" onclick="dmToggleWeekArea('fi')">💰 Finanças</button>
+          <button class="dm-pill" data-warea="pr" onclick="dmToggleWeekArea('pr')">🚀 Projetos</button>
+          <button class="dm-pill" data-warea="ha" onclick="dmToggleWeekArea('ha')">💪 Hábitos</button>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">🎯 Foco principal do dia</label>
+        <input class="dm-input" id="daily-m-focus" type="text" placeholder="O que é mais importante hoje?"/>
+      </div>
+
+      <div class="dm-row-2">
+        <div class="dm-field-group">
+          <label class="dm-lbl">➕ Foco secundário</label>
+          <input class="dm-input" id="daily-m-secondary-focus" type="text" placeholder="Segundo objetivo do dia..."/>
+        </div>
+        <div class="dm-field-group">
+          <label class="dm-lbl">💡 Por que esse foco hoje?</label>
+          <input class="dm-input" id="daily-m-focus-reason" type="text" placeholder="O motivo por trás da escolha..."/>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: Intenção e Planejamento -->
+    <div class="dm-step hidden" id="dm-step-5">
+      <div class="dm-step-header">
+        <div class="dm-step-num">05 / 05</div>
+        <div class="dm-step-title">Intenção e Planejamento</div>
+        <div class="dm-step-desc">Uma intenção clara transforma o dia. Como você quer que hoje seja?</div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">✨ Intenção do dia (uma frase)</label>
+        <input class="dm-input" id="daily-m-intention" type="text" placeholder="Hoje eu escolho..."/>
+      </div>
+
+      <div class="dm-row-2">
+        <div class="dm-field-group">
+          <label class="dm-lbl">🛋️ Período de descanso planejado</label>
+          <input class="dm-input" id="daily-m-rest" type="text" placeholder="Ex: 13h–14h, após 22h..."/>
+        </div>
+        <div class="dm-field-group">
+          <label class="dm-lbl">📝 Notas gerais</label>
+          <input class="dm-input" id="daily-m-notes" type="text" placeholder="Qualquer observação..."/>
+        </div>
+      </div>
+
+      <div class="f-callout f-callout-err hidden" id="daily-m-err" style="margin-top:16px"></div>
     </div>
 
   </div>
+
+  <!-- Footer navigation -->
+  <div style="flex-shrink:0;padding:20px 32px;border-top:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;background:var(--bg)">
+    <div style="display:flex;gap:8px">
+      <button id="daily-m-cancel" onclick="closeMorningCheckin()" style="padding:10px 16px;border-radius:12px;border:1.5px solid rgba(0,0,0,.1);background:transparent;font-size:12px;font-weight:600;color:var(--tx2);cursor:pointer;font-family:'DM Sans',sans-serif">Fechar</button>
+      <button id="dm-btn-back" onclick="dmBack()" class="hidden" style="padding:10px 20px;border-radius:12px;border:1.5px solid rgba(0,0,0,.1);background:transparent;font-size:13px;font-weight:600;color:var(--tx);cursor:pointer;font-family:'DM Sans',sans-serif">← Voltar</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span id="dm-step-counter" style="font-size:11px;font-weight:600;color:var(--tx2)">Passo 1 de 5</span>
+      <button id="dm-btn-next" onclick="dmNext()" style="padding:10px 28px;border-radius:12px;border:none;background:var(--cl);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">Próximo →</button>
+      <button id="dm-btn-save" onclick="saveMorningCheckin()" class="hidden" style="padding:10px 28px;border-radius:12px;border:none;background:var(--fi-c);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">Salvar check-in ✓</button>
+    </div>
+  </div>
+
 </div>
-<!-- DAILY: EVENING REVIEW MODAL -->
-<div class="modal-bg hidden" id="daily-evening-modal">
-  <div class="modal-card wide" style="padding:0;overflow:hidden">
 
-    <!-- Header -->
-    <div style="padding:22px 24px 16px;border-bottom:1px solid rgba(0,0,0,.06)">
-      <div style="font-size:17px;font-weight:800;color:var(--tx);letter-spacing:-.02em">🌙 Fechamento do Dia</div>
-      <div id="daily-e-header-date" style="font-size:12px;color:var(--tx2);margin-top:2px"></div>
+
+
+<!-- DAILY: EVENING REVIEW WIZARD (full-screen) -->
+<div id="daily-evening-modal" style="position:fixed;inset:0;z-index:300;background:var(--bg);display:none;flex-direction:column;overflow:hidden">
+
+  <!-- Top bar -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 32px 0;flex-shrink:0">
+    <div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--tx2)">Fechamento do Dia</div>
+      <div id="daily-e-header-date" style="font-size:13px;font-weight:600;color:var(--tx);margin-top:2px"></div>
+    </div>
+    <button onclick="closeEveningReview()" style="width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.06);cursor:pointer;font-size:16px;color:var(--tx2);display:flex;align-items:center;justify-content:center">✕</button>
+  </div>
+
+  <!-- Progress bar -->
+  <div style="padding:20px 32px 0;flex-shrink:0">
+    <div style="display:flex;gap:6px;align-items:center">
+      <div class="dm-prog-dot active" id="de-dot-1"></div>
+      <div class="dm-prog-line" id="de-line-1"></div>
+      <div class="dm-prog-dot" id="de-dot-2"></div>
+      <div class="dm-prog-line" id="de-line-2"></div>
+      <div class="dm-prog-dot" id="de-dot-3"></div>
+      <div class="dm-prog-line" id="de-line-3"></div>
+      <div class="dm-prog-dot" id="de-dot-4"></div>
+      <div class="dm-prog-line" id="de-line-4"></div>
+      <div class="dm-prog-dot" id="de-dot-5"></div>
+    </div>
+  </div>
+
+  <!-- Step content area -->
+  <div id="de-scroll-area" style="flex:1;overflow-y:auto;padding:0 32px">
+
+    <!-- STEP 1: Fechamento do Dia -->
+    <div class="dm-step" id="de-step-1">
+      <div class="dm-step-header">
+        <div class="dm-step-num">01 / 05</div>
+        <div class="dm-step-title">Fechamento do Dia</div>
+        <div class="dm-step-desc">Como você termina o dia importa. Registre seu estado final e o que aconteceu.</div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">🌙 Energia ao final do dia</div>
+        <div id="daily-e-energy-btns" class="dm-btn-row">
+          <button class="dm-num-btn" data-val="1" onclick="dailyEveningSelectEnergy(1)">1</button>
+          <button class="dm-num-btn" data-val="2" onclick="dailyEveningSelectEnergy(2)">2</button>
+          <button class="dm-num-btn" data-val="3" onclick="dailyEveningSelectEnergy(3)">3</button>
+          <button class="dm-num-btn" data-val="4" onclick="dailyEveningSelectEnergy(4)">4</button>
+          <button class="dm-num-btn" data-val="5" onclick="dailyEveningSelectEnergy(5)">5</button>
+          <button class="dm-num-btn" data-val="6" onclick="dailyEveningSelectEnergy(6)">6</button>
+          <button class="dm-num-btn" data-val="7" onclick="dailyEveningSelectEnergy(7)">7</button>
+          <button class="dm-num-btn" data-val="8" onclick="dailyEveningSelectEnergy(8)">8</button>
+          <button class="dm-num-btn" data-val="9" onclick="dailyEveningSelectEnergy(9)">9</button>
+          <button class="dm-num-btn" data-val="10" onclick="dailyEveningSelectEnergy(10)">10</button>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <div class="dm-lbl">Como foi o dia?</div>
+        <div id="daily-e-feeling-btns" class="dm-btn-row">
+          <button class="dm-pill" data-feel="ruim" onclick="dailyEveningSelectFeeling('ruim')">😔 Ruim</button>
+          <button class="dm-pill" data-feel="ok" onclick="dailyEveningSelectFeeling('ok')">😐 Ok</button>
+          <button class="dm-pill" data-feel="bom" onclick="dailyEveningSelectFeeling('bom')">😊 Bom</button>
+          <button class="dm-pill" data-feel="excelente" onclick="dailyEveningSelectFeeling('excelente')">🚀 Excelente</button>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">✨ Coisas boas que aconteceram</label>
+        <textarea class="dm-input" id="daily-e-goodthings" rows="3" placeholder="O que de bom aconteceu hoje?" style="resize:none;height:auto"></textarea>
+      </div>
+
+      <div class="dm-row-2">
+        <div class="dm-field-group">
+          <label class="dm-lbl">🏆 Principal vitória do dia</label>
+          <input class="dm-input" id="daily-e-wins" type="text" placeholder="Algo que merece ser celebrado..."/>
+        </div>
+        <div class="dm-field-group">
+          <label class="dm-lbl">✅ O que funcionou hoje?</label>
+          <input class="dm-input" id="daily-e-worked" type="text" placeholder="Vitórias, fluxos, acertos..."/>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">⚠️ O que não funcionou?</label>
+        <input class="dm-input" id="daily-e-notworked" type="text" placeholder="Obstáculos, distrações, o que pesou..."/>
+      </div>
     </div>
 
-    <!-- Scrollable body -->
-    <div style="padding:20px 24px;overflow-y:auto;max-height:72vh;display:flex;flex-direction:column;gap:20px">
-
-      <!-- Section 1: Resumo Final -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">01 — Resumo Final</div>
-        <div style="background:rgba(0,0,0,.03);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:14px">
-          <div>
-            <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:8px">Nível de energia ao final do dia</div>
-            <div id="daily-e-energy-btns" style="display:flex;gap:5px;flex-wrap:wrap">
-              <button class="ev-energy-btn" data-val="1" onclick="dailyEveningSelectEnergy(1)">1</button>
-              <button class="ev-energy-btn" data-val="2" onclick="dailyEveningSelectEnergy(2)">2</button>
-              <button class="ev-energy-btn" data-val="3" onclick="dailyEveningSelectEnergy(3)">3</button>
-              <button class="ev-energy-btn" data-val="4" onclick="dailyEveningSelectEnergy(4)">4</button>
-              <button class="ev-energy-btn" data-val="5" onclick="dailyEveningSelectEnergy(5)">5</button>
-              <button class="ev-energy-btn" data-val="6" onclick="dailyEveningSelectEnergy(6)">6</button>
-              <button class="ev-energy-btn" data-val="7" onclick="dailyEveningSelectEnergy(7)">7</button>
-              <button class="ev-energy-btn" data-val="8" onclick="dailyEveningSelectEnergy(8)">8</button>
-              <button class="ev-energy-btn" data-val="9" onclick="dailyEveningSelectEnergy(9)">9</button>
-              <button class="ev-energy-btn" data-val="10" onclick="dailyEveningSelectEnergy(10)">10</button>
-            </div>
-          </div>
-          <div>
-            <div style="font-size:12px;font-weight:600;color:var(--tx);margin-bottom:8px">Como foi o dia?</div>
-            <div id="daily-e-feeling-btns" style="display:flex;gap:6px">
-              <button class="ev-feel-btn" data-feel="ruim" onclick="dailyEveningSelectFeeling('ruim')">😔 Ruim</button>
-              <button class="ev-feel-btn" data-feel="ok" onclick="dailyEveningSelectFeeling('ok')">😐 Ok</button>
-              <button class="ev-feel-btn" data-feel="bom" onclick="dailyEveningSelectFeeling('bom')">😊 Bom</button>
-              <button class="ev-feel-btn" data-feel="excelente" onclick="dailyEveningSelectFeeling('excelente')">🚀 Excelente</button>
-            </div>
-          </div>
-        </div>
+    <!-- STEP 2: Hábitos de Hoje -->
+    <div class="dm-step hidden" id="de-step-2">
+      <div class="dm-step-header">
+        <div class="dm-step-num">02 / 05</div>
+        <div class="dm-step-title">Hábitos de Hoje</div>
+        <div class="dm-step-desc">Feche o loop dos hábitos. Marque o que foi feito — os dados serão salvos automaticamente.</div>
       </div>
-
-      <!-- Section 2: Hábitos -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">02 — Hábitos de Hoje</div>
-        <div id="daily-e-habits" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-      </div>
-
-      <!-- Section 3: Tarefas -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">03 — Tarefas do Dia</div>
-        <div id="daily-e-tasks" style="display:flex;flex-wrap:wrap;gap:8px"></div>
-      </div>
-
-      <!-- Section 4: Reflexão -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">04 — Reflexão</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">✅ O que funcionou hoje?</label>
-            <textarea class="f-input" id="daily-e-worked" rows="2" placeholder="Vitórias, fluxos, acertos..." style="resize:none;margin:0"></textarea>
-          </div>
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">⚠️ O que não funcionou?</label>
-            <textarea class="f-input" id="daily-e-notworked" rows="2" placeholder="Obstáculos, distrações, erros..." style="resize:none;margin:0"></textarea>
-          </div>
-          <div class="f-grid" style="gap:8px">
-            <div>
-              <label class="f-lbl" style="margin-bottom:5px">🏆 Principal vitória</label>
-              <input class="f-input" id="daily-e-wins" type="text" placeholder="Algo para celebrar..." style="margin:0"/>
-            </div>
-            <div>
-              <label class="f-lbl" style="margin-bottom:5px">💡 O que faria diferente?</label>
-              <input class="f-input" id="daily-e-mistakes" type="text" placeholder="Aprendizado do dia..." style="margin:0"/>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 5: Amanhã -->
-      <div>
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--tx2);margin-bottom:12px">05 — Amanhã</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">🎯 Foco principal de amanhã</label>
-            <input class="f-input" id="daily-e-tomorrow" type="text" placeholder="A coisa mais importante de amanhã é..." style="margin:0"/>
-          </div>
-          <div>
-            <label class="f-lbl" style="margin-bottom:5px">📝 Notas finais</label>
-            <textarea class="f-input" id="daily-e-notes" rows="2" placeholder="Qualquer outra coisa..." style="resize:none;margin:0"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="f-callout f-callout-err hidden" id="daily-e-err"></div>
+      <div id="daily-e-habits" style="display:flex;flex-wrap:wrap;gap:10px"></div>
     </div>
 
-    <!-- Footer -->
-    <div style="padding:16px 24px;border-top:1px solid rgba(0,0,0,.06);display:flex;gap:8px;justify-content:flex-end">
-      <button class="f-btn f-btn-cancel" id="daily-e-cancel">Cancelar</button>
-      <button class="f-btn f-btn-save" id="daily-e-save">Salvar fechamento</button>
+    <!-- STEP 3: Tarefas do Dia -->
+    <div class="dm-step hidden" id="de-step-3">
+      <div class="dm-step-header">
+        <div class="dm-step-num">03 / 05</div>
+        <div class="dm-step-title">Tarefas do Dia</div>
+        <div class="dm-step-desc">O que foi realmente feito? Marque as tarefas concluídas.</div>
+      </div>
+      <div id="daily-e-tasks" style="display:flex;flex-wrap:wrap;gap:10px"></div>
+    </div>
+
+    <!-- STEP 4: Execução e Aprendizado -->
+    <div class="dm-step hidden" id="de-step-4">
+      <div class="dm-step-header">
+        <div class="dm-step-num">04 / 05</div>
+        <div class="dm-step-title">Execução e Aprendizado</div>
+        <div class="dm-step-desc">Refletir sobre como você executou torna amanhã melhor.</div>
+      </div>
+
+      <div id="de-task-ratings" style="margin-bottom:28px"></div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">💡 O que faria diferente?</label>
+        <input class="dm-input" id="daily-e-mistakes" type="text" placeholder="Principal aprendizado do dia..."/>
+      </div>
+
+      <div class="dm-row-2">
+        <div class="dm-field-group">
+          <label class="dm-lbl">📚 Conteúdo inteligente consumido</label>
+          <input class="dm-input" id="daily-e-content" type="text" placeholder="Livro, podcast, artigo, vídeo..."/>
+        </div>
+        <div class="dm-field-group">
+          <label class="dm-lbl">📰 Principal notícia do dia</label>
+          <input class="dm-input" id="daily-e-news" type="text" placeholder="O que aconteceu no mundo hoje?"/>
+        </div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">📦 O que fica pendente para amanhã?</label>
+        <input class="dm-input" id="daily-e-carry" type="text" placeholder="O que não terminei e precisa ir para amanhã..."/>
+      </div>
+    </div>
+
+    <!-- STEP 5: Amanhã -->
+    <div class="dm-step hidden" id="de-step-5">
+      <div class="dm-step-header">
+        <div class="dm-step-num">05 / 05</div>
+        <div class="dm-step-title">Amanhã</div>
+        <div class="dm-step-desc">Fechar o dia com uma intenção para amanhã torna o próximo dia mais claro.</div>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">🎯 Foco principal de amanhã</label>
+        <input class="dm-input" id="daily-e-tomorrow" type="text" placeholder="A coisa mais importante de amanhã é..."/>
+      </div>
+
+      <div class="dm-field-group">
+        <label class="dm-lbl">📝 Notas finais</label>
+        <textarea class="dm-input" id="daily-e-notes" rows="3" placeholder="Qualquer outra coisa que quero registrar antes de fechar o dia..." style="resize:none;height:auto"></textarea>
+      </div>
+
+      <div class="f-callout f-callout-err hidden" id="daily-e-err" style="margin-top:8px"></div>
     </div>
 
   </div>
+
+  <!-- Footer navigation -->
+  <div style="flex-shrink:0;padding:20px 32px;border-top:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;background:var(--bg)">
+    <div style="display:flex;gap:8px">
+      <button id="daily-e-cancel" onclick="closeEveningReview()" style="padding:10px 16px;border-radius:12px;border:1.5px solid rgba(0,0,0,.1);background:transparent;font-size:12px;font-weight:600;color:var(--tx2);cursor:pointer;font-family:'DM Sans',sans-serif">Fechar</button>
+      <button id="de-btn-back" onclick="deBack()" class="hidden" style="padding:10px 20px;border-radius:12px;border:1.5px solid rgba(0,0,0,.1);background:transparent;font-size:13px;font-weight:600;color:var(--tx);cursor:pointer;font-family:'DM Sans',sans-serif">← Voltar</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span id="de-step-counter" style="font-size:11px;font-weight:600;color:var(--tx2)">Passo 1 de 5</span>
+      <button id="de-btn-next" onclick="deNext()" style="padding:10px 28px;border-radius:12px;border:none;background:var(--tx);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">Próximo →</button>
+      <button id="de-btn-save" onclick="saveEveningReview()" class="hidden" style="padding:10px 28px;border-radius:12px;border:none;background:var(--fi-c);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">Salvar fechamento ✓</button>
+    </div>
+  </div>
+
 </div>
 </body>
 <script>
@@ -6328,8 +6595,45 @@ function getRecentDailyEntries(days) {
 function _dailyBlankEntry(date) {
   return {
     date,
-    morning: { energy: null, clarity: null, state: null, mainFocus: '', secondaryFocus: '', focusReason: '', financeUpdated: false, totalInvested: null, financeNotes: '', intention: '', notes: '' },
-    evening: { energy: null, feeling: null, wins: '', mistakes: '', whatWorked: '', whatDidNotWork: '', tomorrowFocus: '', notes: '' },
+    morning: {
+      // ── existing fields ──
+      energy: null, clarity: null, state: null,
+      mainFocus: '', secondaryFocus: '', focusReason: '',
+      financeUpdated: false, totalInvested: null, financeNotes: '',
+      intention: '', notes: '',
+      // ── Phase 1 additions ──
+      sleepHours: null,          // number 1–12
+      sleepQuality: null,        // number 1–5
+      bodyState: null,           // number 1–5
+      mood: null,                // 'triste'|'neutro'|'animado'|'excelente'
+      screenTimeYesterday: null, // number (hours, decimal ok)
+      mainAppYesterday: '',      // string
+      reduceScreenToday: false,  // boolean
+      screenReductionPlan: '',   // string
+      usdRate: null,             // number
+      btcRate: null,             // number
+      ibovespa: null,            // number
+      fundsSnapshot: [],         // [{name, value}] — historical snapshot only, never written back to FIN_KEY
+      currentGoal: '',           // string
+      weekFocusAreas: [],        // array of area keys: ['cl','po',...]
+      timeBlocks: [],            // [{start, end, task, area}] — reserved for Phase 4
+      hasBuffer: false,          // boolean
+      restPeriod: ''             // string
+    },
+    evening: {
+      // ── existing fields ──
+      energy: null, feeling: null,
+      wins: '', mistakes: '',
+      whatWorked: '', whatDidNotWork: '',
+      tomorrowFocus: '', notes: '',
+      // ── Phase 1 additions ──
+      goodThings: '',            // string
+      intelligentContent: '',    // string
+      mainNews: '',              // string
+      carryToTomorrow: '',       // string
+      taskRatings: {},           // {[taskId]: {rating: 1|2|3, wouldDoDiff: ''}}
+      tomorrowSuggestedTasks: [] // array of task IDs — reserved for Phase 6
+    },
     focusAreas: { cl: 0, po: 0, fi: 0, pr: 0, ha: 0 },
     habits: {},
     completedTasks: [],
@@ -6475,13 +6779,80 @@ function renderDailyUpdate() {
 }
 
 // ── Morning Check-in ──
+let _dmCurrentStep = 1;
+const DM_TOTAL_STEPS = 5;
+
+function dmGoStep(n) {
+  _dmCurrentStep = n;
+  // Show/hide steps
+  for (let i = 1; i <= DM_TOTAL_STEPS; i++) {
+    document.getElementById(`dm-step-${i}`)?.classList.toggle('hidden', i !== n);
+  }
+  // Progress dots and lines
+  for (let i = 1; i <= DM_TOTAL_STEPS; i++) {
+    const dot = document.getElementById(`dm-dot-${i}`);
+    if (!dot) continue;
+    dot.classList.remove('active','done');
+    if (i === n) dot.classList.add('active');
+    else if (i < n) dot.classList.add('done');
+  }
+  for (let i = 1; i < DM_TOTAL_STEPS; i++) {
+    const line = document.getElementById(`dm-line-${i}`);
+    if (!line) continue;
+    line.classList.toggle('done', i < n);
+  }
+  // Footer buttons
+  document.getElementById('dm-btn-back')?.classList.toggle('hidden', n === 1);
+  const isLast = n === DM_TOTAL_STEPS;
+  document.getElementById('dm-btn-next')?.classList.toggle('hidden', isLast);
+  document.getElementById('dm-btn-save')?.classList.toggle('hidden', !isLast);
+  // Step counter
+  const counter = document.getElementById('dm-step-counter');
+  if (counter) counter.textContent = `Passo ${n} de ${DM_TOTAL_STEPS}`;
+  // Scroll content to top
+  document.querySelector('#daily-morning-modal > div[style*="overflow-y"]')?.scrollTo(0, 0);
+}
+
+function dmNext() { if (_dmCurrentStep < DM_TOTAL_STEPS) dmGoStep(_dmCurrentStep + 1); }
+function dmBack() { if (_dmCurrentStep > 1) dmGoStep(_dmCurrentStep - 1); }
+
 let _dailySelectedEnergy = null;
 let _dailySelectedClarity = null;
 let _dailySelectedMorningState = null;
+let _dmSleep = null;
+let _dmSleepQ = null;
+let _dmBody = null;
+let _dmMood = null;
+let _dmWeekAreas = [];
+
+// Generic scale selector for morning buttons
+function dmSelect(type, val) {
+  const map = { sleep: ['daily-m-sleep-btns','slp'], sleepq: ['daily-m-sleepq-btns','slpq'], body: ['daily-m-body-btns','body'] };
+  const [containerId, attr] = map[type] || [];
+  if (!containerId) return;
+  if (type === 'sleep') _dmSleep = val;
+  else if (type === 'sleepq') _dmSleepQ = val;
+  else if (type === 'body') _dmBody = val;
+  document.querySelectorAll(`#${containerId} .dm-chip`).forEach(b => {
+    const active = +b.dataset[attr] === val;
+    b.classList.toggle('active', active);
+  });
+}
+
+function dmSelectMood(m) {
+  _dmMood = m;
+  document.querySelectorAll('#daily-m-mood-btns .dm-pill').forEach(b => b.classList.toggle('active', b.dataset.mood === m));
+}
+
+function dmToggleWeekArea(area) {
+  const idx = _dmWeekAreas.indexOf(area);
+  if (idx >= 0) _dmWeekAreas.splice(idx, 1); else _dmWeekAreas.push(area);
+  document.querySelectorAll('#daily-m-week-areas .dm-pill').forEach(b => b.classList.toggle('active', _dmWeekAreas.includes(b.dataset.warea)));
+}
 
 function dailySelectEnergy(n) {
   _dailySelectedEnergy = n;
-  document.querySelectorAll('#daily-energy-btns .ev-energy-btn').forEach(b => {
+  document.querySelectorAll('#daily-energy-btns .dm-num-btn').forEach(b => {
     const v = +b.dataset.energy;
     b.classList.toggle('active', v === n);
     b.style.background = v === n ? (n >= 8 ? 'var(--fi-c)' : n >= 5 ? 'var(--cl)' : 'var(--ha)') : '';
@@ -6490,7 +6861,7 @@ function dailySelectEnergy(n) {
 
 function dailySelectClarity(n) {
   _dailySelectedClarity = n;
-  document.querySelectorAll('#daily-m-clarity-btns .ev-energy-btn').forEach(b => {
+  document.querySelectorAll('#daily-m-clarity-btns .dm-num-btn').forEach(b => {
     const v = +b.dataset.clarity;
     b.classList.toggle('active', v === n);
     b.style.background = v === n ? (n >= 8 ? 'var(--fi-c)' : n >= 5 ? 'var(--cl)' : 'var(--ha)') : '';
@@ -6499,7 +6870,7 @@ function dailySelectClarity(n) {
 
 function dailySelectMorningState(s) {
   _dailySelectedMorningState = s;
-  document.querySelectorAll('#daily-m-state-btns .ev-feel-btn').forEach(b => b.classList.toggle('active', b.dataset.mstate === s));
+  document.querySelectorAll('#daily-m-state-btns .dm-pill').forEach(b => b.classList.toggle('active', b.dataset.mstate === s));
 }
 
 function openMorningCheckin() {
@@ -6514,33 +6885,81 @@ function openMorningCheckin() {
   const dateEl = document.getElementById('daily-m-header-date');
   if (dateEl) dateEl.textContent = `${wd[d.getDay()]}, ${d.getDate()} de ${mo[d.getMonth()]}`;
 
-  // Reset and restore state selectors
+  // Restore scalar selectors
   _dailySelectedEnergy = m.energy || null;
   _dailySelectedClarity = m.clarity || null;
   _dailySelectedMorningState = m.state || null;
-  document.querySelectorAll('#daily-energy-btns .ev-energy-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; });
-  document.querySelectorAll('#daily-m-clarity-btns .ev-energy-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; });
-  document.querySelectorAll('#daily-m-state-btns .ev-feel-btn').forEach(b => b.classList.remove('active'));
+  _dmSleep = m.sleepHours || null;
+  _dmSleepQ = m.sleepQuality || null;
+  _dmBody = m.bodyState || null;
+  _dmMood = m.mood || null;
+  _dmWeekAreas = Array.isArray(m.weekFocusAreas) ? [...m.weekFocusAreas] : [];
+
+  // Reset all button groups (use wizard CSS classes)
+  document.querySelectorAll('#daily-energy-btns .dm-num-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; });
+  document.querySelectorAll('#daily-m-clarity-btns .dm-num-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; });
+  document.querySelectorAll('#daily-m-state-btns .dm-pill').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#daily-m-sleep-btns .dm-chip').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#daily-m-sleepq-btns .dm-chip').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#daily-m-body-btns .dm-chip').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#daily-m-mood-btns .dm-pill').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#daily-m-week-areas .dm-pill').forEach(b => b.classList.remove('active'));
+
+  // Restore active states
   if (_dailySelectedEnergy) dailySelectEnergy(_dailySelectedEnergy);
   if (_dailySelectedClarity) dailySelectClarity(_dailySelectedClarity);
   if (_dailySelectedMorningState) dailySelectMorningState(_dailySelectedMorningState);
+  if (_dmSleep) dmSelect('sleep', _dmSleep);
+  if (_dmSleepQ) dmSelect('sleepq', _dmSleepQ);
+  if (_dmBody) dmSelect('body', _dmBody);
+  if (_dmMood) dmSelectMood(_dmMood);
+  _dmWeekAreas.forEach(a => document.querySelector(`#daily-m-week-areas [data-warea="${a}"]`)?.classList.add('active'));
 
-  // Text fields
-  document.getElementById('daily-m-focus').value = m.mainFocus || '';
-  document.getElementById('daily-m-secondary-focus').value = m.secondaryFocus || '';
-  document.getElementById('daily-m-focus-reason').value = m.focusReason || '';
+  // Text / number fields
+  document.getElementById('daily-m-screen-time').value = m.screenTimeYesterday != null ? m.screenTimeYesterday : '';
+  document.getElementById('daily-m-main-app').value = m.mainAppYesterday || '';
+  document.getElementById('daily-m-reduce-screen').checked = !!m.reduceScreenToday;
+  document.getElementById('daily-m-screen-plan').value = m.screenReductionPlan || '';
+  document.getElementById('daily-m-usd').value = m.usdRate != null ? m.usdRate : '';
+  document.getElementById('daily-m-btc').value = m.btcRate != null ? m.btcRate : '';
+  document.getElementById('daily-m-ibov').value = m.ibovespa != null ? m.ibovespa : '';
   document.getElementById('daily-m-finance').checked = !!m.financeUpdated;
   document.getElementById('daily-m-invested').value = m.totalInvested != null ? m.totalInvested : '';
   document.getElementById('daily-m-fin-notes').value = m.financeNotes || '';
+  document.getElementById('daily-m-current-goal').value = m.currentGoal || '';
+  document.getElementById('daily-m-focus').value = m.mainFocus || '';
+  document.getElementById('daily-m-secondary-focus').value = m.secondaryFocus || '';
+  document.getElementById('daily-m-focus-reason').value = m.focusReason || '';
   document.getElementById('daily-m-intention').value = m.intention || '';
+  document.getElementById('daily-m-rest').value = m.restPeriod || '';
   document.getElementById('daily-m-notes').value = m.notes || '';
   document.getElementById('daily-m-err').classList.add('hidden');
 
-  document.getElementById('daily-morning-modal').classList.remove('hidden');
+  // Funds snapshot: preload from FIN.fundos as editable suggestions (never writes back)
+  const fundsEl = document.getElementById('daily-m-funds-list');
+  if (fundsEl) {
+    const savedSnap = Array.isArray(m.fundsSnapshot) ? m.fundsSnapshot : [];
+    const fundos = (typeof FIN !== 'undefined' && FIN.fundos) ? FIN.fundos : [];
+    const rows = fundos.map(f => {
+      const saved = savedSnap.find(s => s.name === f.name);
+      const val = saved ? saved.value : (f.saldo || '');
+      return `<div style="display:flex;align-items:center;gap:12px">
+        <div style="flex:1;font-size:14px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.name}</div>
+        <input class="dm-input" type="number" step="0.01" min="0"
+          data-fund-name="${f.name.replace(/"/g,'&quot;')}"
+          value="${val}" placeholder="Saldo hoje"
+          style="width:150px;flex-shrink:0;font-family:'DM Mono',monospace"/>
+      </div>`;
+    });
+    fundsEl.innerHTML = rows.length ? rows.join('') : '<div style="font-size:12px;color:var(--tx2)">Nenhum fundo cadastrado.</div>';
+  }
+
+  dmGoStep(1);
+  document.getElementById('daily-morning-modal').style.display = 'flex';
 }
 
 function closeMorningCheckin() {
-  document.getElementById('daily-morning-modal').classList.add('hidden');
+  document.getElementById('daily-morning-modal').style.display = 'none';
 }
 
 function saveMorningCheckin() {
@@ -6552,8 +6971,18 @@ function saveMorningCheckin() {
   errEl.classList.add('hidden');
   const today = new Date().toISOString().slice(0, 10);
   const entry = getDailyByDate(today) || _dailyBlankEntry(today);
-  const investedVal = document.getElementById('daily-m-invested').value;
+
+  // Read funds snapshot from inputs — does NOT write to FIN/FIN_KEY
+  const fundsSnap = [];
+  document.querySelectorAll('#daily-m-funds-list input[data-fund-name]').forEach(inp => {
+    const val = inp.value.trim();
+    if (val !== '') fundsSnap.push({ name: inp.dataset.fundName, value: +val });
+  });
+
+  const numOrNull = id => { const v = document.getElementById(id)?.value; return v !== '' && v != null ? +v : null; };
+
   entry.morning = {
+    // existing
     energy: _dailySelectedEnergy,
     clarity: _dailySelectedClarity,
     state: _dailySelectedMorningState,
@@ -6561,11 +6990,31 @@ function saveMorningCheckin() {
     secondaryFocus: document.getElementById('daily-m-secondary-focus').value.trim(),
     focusReason: document.getElementById('daily-m-focus-reason').value.trim(),
     financeUpdated: document.getElementById('daily-m-finance').checked,
-    totalInvested: investedVal !== '' ? +investedVal : null,
+    totalInvested: numOrNull('daily-m-invested'),
     financeNotes: document.getElementById('daily-m-fin-notes').value.trim(),
     intention: document.getElementById('daily-m-intention').value.trim(),
-    notes: document.getElementById('daily-m-notes').value.trim()
+    notes: document.getElementById('daily-m-notes').value.trim(),
+    // new Phase 2
+    sleepHours: _dmSleep,
+    sleepQuality: _dmSleepQ,
+    bodyState: _dmBody,
+    mood: _dmMood,
+    screenTimeYesterday: numOrNull('daily-m-screen-time'),
+    mainAppYesterday: document.getElementById('daily-m-main-app').value.trim(),
+    reduceScreenToday: document.getElementById('daily-m-reduce-screen').checked,
+    screenReductionPlan: document.getElementById('daily-m-screen-plan').value.trim(),
+    usdRate: numOrNull('daily-m-usd'),
+    btcRate: numOrNull('daily-m-btc'),
+    ibovespa: numOrNull('daily-m-ibov'),
+    fundsSnapshot: fundsSnap,           // historical only — FIN_KEY untouched
+    currentGoal: document.getElementById('daily-m-current-goal').value.trim(),
+    weekFocusAreas: [..._dmWeekAreas],
+    restPeriod: document.getElementById('daily-m-rest').value.trim(),
+    // Phase 4 reserved
+    timeBlocks: entry.morning?.timeBlocks || [],
+    hasBuffer: entry.morning?.hasBuffer || false
   };
+
   saveDailyEntry(today, entry);
   closeMorningCheckin();
   showToast('Check-in salvo ✓');
@@ -6573,22 +7022,59 @@ function saveMorningCheckin() {
 }
 
 // ── Evening Review ──
+const DE_TOTAL_STEPS = 5;
+let _deCurrentStep = 1;
+
+function deGoStep(n) {
+  _deCurrentStep = Math.max(1, Math.min(DE_TOTAL_STEPS, n));
+  for (let i = 1; i <= DE_TOTAL_STEPS; i++) {
+    document.getElementById(`de-step-${i}`)?.classList.toggle('hidden', i !== _deCurrentStep);
+  }
+  for (let i = 1; i <= DE_TOTAL_STEPS; i++) {
+    const dot = document.getElementById(`de-dot-${i}`);
+    if (!dot) continue;
+    dot.classList.remove('active', 'done');
+    if (i === _deCurrentStep) dot.classList.add('active');
+    else if (i < _deCurrentStep) dot.classList.add('done');
+  }
+  for (let i = 1; i < DE_TOTAL_STEPS; i++) {
+    document.getElementById(`de-line-${i}`)?.classList.toggle('done', i < _deCurrentStep);
+  }
+  const counter = document.getElementById('de-step-counter');
+  if (counter) counter.textContent = `Passo ${_deCurrentStep} de ${DE_TOTAL_STEPS}`;
+  document.getElementById('de-btn-back')?.classList.toggle('hidden', _deCurrentStep === 1);
+  const isLast = _deCurrentStep === DE_TOTAL_STEPS;
+  document.getElementById('de-btn-next')?.classList.toggle('hidden', isLast);
+  document.getElementById('de-btn-save')?.classList.toggle('hidden', !isLast);
+  document.getElementById('de-scroll-area')?.scrollTo(0, 0);
+}
+
+function deNext() { if (_deCurrentStep < DE_TOTAL_STEPS) deGoStep(_deCurrentStep + 1); }
+function deBack() { if (_deCurrentStep > 1) deGoStep(_deCurrentStep - 1); }
+
 let _dailyEveningEnergy = null;
 let _dailyEveningFeeling = null;
 
 function dailyEveningSelectEnergy(n) {
   _dailyEveningEnergy = n;
-  document.querySelectorAll('.ev-energy-btn').forEach(b => {
+  document.querySelectorAll('#daily-e-energy-btns .dm-num-btn').forEach(b => {
     const v = +b.dataset.val;
     b.classList.toggle('active', v === n);
-    if (v === n) b.style.background = n >= 8 ? 'var(--fi-c)' : n >= 5 ? 'var(--cl)' : 'var(--ha)';
-    else b.style.background = '';
+    b.style.background = v === n ? (n >= 8 ? 'var(--fi-c)' : n >= 5 ? 'var(--cl)' : 'var(--ha)') : '';
   });
 }
 
 function dailyEveningSelectFeeling(f) {
   _dailyEveningFeeling = f;
-  document.querySelectorAll('.ev-feel-btn').forEach(b => b.classList.toggle('active', b.dataset.feel === f));
+  document.querySelectorAll('#daily-e-feeling-btns .dm-pill').forEach(b => b.classList.toggle('active', b.dataset.feel === f));
+}
+
+function deSelectRating(btn, taskId, rating) {
+  document.querySelectorAll(`.de-rating-btn[data-taskid="${taskId}"]`).forEach(b => {
+    b.classList.remove('active'); b.style.background = ''; b.style.borderColor = ''; b.style.color = '';
+  });
+  btn.classList.add('active');
+  btn.style.background = 'var(--cl)'; btn.style.borderColor = 'var(--cl)'; btn.style.color = '#fff';
 }
 
 function openEveningReview() {
@@ -6597,34 +7083,42 @@ function openEveningReview() {
   const e = entry.evening || {};
 
   // Header date
-  const d = new Date(); const wd = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+  const d = new Date();
+  const wd = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
   const mo = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
   const dateEl = document.getElementById('daily-e-header-date');
   if (dateEl) dateEl.textContent = `${wd[d.getDay()]}, ${d.getDate()} de ${mo[d.getMonth()]}`;
 
-  // Section 1: energy + feeling
+  // Step 1: energy + feeling
   _dailyEveningEnergy = e.energy || null;
   _dailyEveningFeeling = e.feeling || null;
-  // reset all first
-  document.querySelectorAll('.ev-energy-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; });
-  document.querySelectorAll('.ev-feel-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#daily-e-energy-btns .dm-num-btn').forEach(b => { b.classList.remove('active'); b.style.background = ''; });
+  document.querySelectorAll('#daily-e-feeling-btns .dm-pill').forEach(b => b.classList.remove('active'));
   if (_dailyEveningEnergy) dailyEveningSelectEnergy(_dailyEveningEnergy);
   if (_dailyEveningFeeling) dailyEveningSelectFeeling(_dailyEveningFeeling);
 
-  // Section 3: reflection fields
+  // Step 1: text fields
+  document.getElementById('daily-e-goodthings').value = e.goodThings || '';
+  document.getElementById('daily-e-wins').value = e.wins || '';
   document.getElementById('daily-e-worked').value = e.whatWorked || '';
   document.getElementById('daily-e-notworked').value = e.whatDidNotWork || '';
-  document.getElementById('daily-e-wins').value = e.wins || '';
+
+  // Step 4: execution + learning
   document.getElementById('daily-e-mistakes').value = e.mistakes || '';
+  document.getElementById('daily-e-content').value = e.intelligentContent || '';
+  document.getElementById('daily-e-news').value = e.mainNews || '';
+  document.getElementById('daily-e-carry').value = e.carryToTomorrow || '';
+
+  // Step 5: tomorrow
   document.getElementById('daily-e-tomorrow').value = e.tomorrowFocus || '';
   document.getElementById('daily-e-notes').value = e.notes || '';
   document.getElementById('daily-e-err').classList.add('hidden');
 
-  // Section 2: habit tiles
+  // Step 2: habit tiles
   const habitsEl = document.getElementById('daily-e-habits');
   const activeHabits = (typeof habLoad === 'function' ? habLoad() : []).filter(h => !h.archived);
   if (!activeHabits.length) {
-    habitsEl.innerHTML = '<div style="font-size:12px;color:var(--tx2)">Nenhum hábito ativo cadastrado.</div>';
+    habitsEl.innerHTML = '<div style="font-size:14px;color:var(--tx2);padding:8px 0">Nenhum hábito ativo cadastrado.</div>';
   } else {
     habitsEl.innerHTML = activeHabits.map(h => {
       const done = (h.completedDates || []).includes(today);
@@ -6636,27 +7130,58 @@ function openEveningReview() {
     }).join('');
   }
 
-  // Section 3: today's planning tasks as tiles
+  // Step 3: today's planning tasks
   const tasksEl = document.getElementById('daily-e-tasks');
-  const todayISO = new Date().toISOString().slice(0, 10);
-  const todayTasks = (PLAN && PLAN.tasks ? PLAN.tasks : []).filter(t => t.date === todayISO);
+  const todayTasks = (PLAN && PLAN.tasks ? PLAN.tasks : []).filter(t => t.date === today);
   if (!todayTasks.length) {
-    tasksEl.innerHTML = '<div style="font-size:12px;color:var(--tx2)">Nenhuma tarefa planejada para hoje.</div>';
+    tasksEl.innerHTML = '<div style="font-size:14px;color:var(--tx2);padding:8px 0">Nenhuma tarefa planejada para hoje.</div>';
   } else {
     tasksEl.innerHTML = todayTasks.map(t => {
       const areaColor = (typeof AC !== 'undefined' && AC[t.area]) ? AC[t.area] : '#888';
       return `<label class="ev-task-tile${t.done ? ' done' : ''}" onclick="dailyToggleTaskTile(this)">
         <input type="checkbox" data-taskid="${t.id}" ${t.done ? 'checked' : ''}/>
         <span style="color:${t.done ? '' : areaColor};font-size:11px">${t.done ? '✓' : '○'}</span>
-        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px">${t.title}</span>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px">${t.title}</span>
         <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;background:${areaColor}22;color:${areaColor};flex-shrink:0">${t.area.toUpperCase()}</span>
       </label>`;
     }).join('');
   }
 
-  document.getElementById('daily-evening-modal').classList.remove('hidden');
-}
+  // Step 4: task rating UI
+  const ratingsEl = document.getElementById('de-task-ratings');
+  const savedRatings = e.taskRatings || {};
+  const completedTasks = todayTasks.filter(t => t.done);
+  if (ratingsEl) {
+    if (!completedTasks.length) {
+      ratingsEl.innerHTML = '<div style="font-size:14px;color:var(--tx2);padding:8px 0 16px">Nenhuma tarefa concluída ainda — marque as tarefas no passo anterior.</div>';
+    } else {
+      ratingsEl.innerHTML = '<div class="dm-lbl" style="margin-bottom:12px">⭐ Avaliação das tarefas concluídas</div>' +
+        completedTasks.map(t => {
+          const r = savedRatings[t.id] || {};
+          const areaColor = (typeof AC !== 'undefined' && AC[t.area]) ? AC[t.area] : '#888';
+          return `<div style="background:rgba(0,0,0,.03);border-radius:14px;padding:14px 16px;margin-bottom:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:10px;display:flex;align-items:center;gap:8px">
+              <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;background:${areaColor}22;color:${areaColor}">${t.area.toUpperCase()}</span>
+              ${t.title}
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:8px">
+              ${[1,2,3].map(n => `<button class="dm-chip de-rating-btn${r.rating===n?' active':''}" data-taskid="${t.id}" data-rating="${n}"
+                onclick="deSelectRating(this,${t.id},${n})"
+                style="${r.rating===n?'background:var(--cl);border-color:var(--cl);color:#fff':''}">
+                ${{1:'⭐5 Ruim',2:'⭐⭐ Ok',3:'⭐⭐⭐ Ótimo'}[n]}
+              </button>`).join('')}
+            </div>
+            <input class="dm-input" type="text" data-taskid-diff="${t.id}"
+              value="${(r.wouldDoDiff||'').replace(/"/g,'&quot;')}"
+              placeholder="O que faria diferente?" style="font-size:13px"/>
+          </div>`;
+        }).join('');
+    }
+  }
 
+  deGoStep(1);
+  document.getElementById('daily-evening-modal').style.display = 'flex';
+}
 function dailyToggleTaskTile(label) {
   const cb = label.querySelector('input[type="checkbox"]');
   if (!cb) return;
@@ -6666,7 +7191,7 @@ function dailyToggleTaskTile(label) {
 }
 
 function closeEveningReview() {
-  document.getElementById('daily-evening-modal').classList.add('hidden');
+  document.getElementById('daily-evening-modal').style.display = 'none';
 }
 
 function dailyToggleHabTile(label) {
@@ -6679,26 +7204,40 @@ function dailyToggleHabTile(label) {
 
 function saveEveningReview() {
   const errEl = document.getElementById('daily-e-err');
-  const worked = document.getElementById('daily-e-worked').value.trim();
-  if (!worked) {
-    errEl.textContent = 'Preencha pelo menos "O que funcionou".';
-    errEl.classList.remove('hidden'); return;
-  }
   errEl.classList.add('hidden');
   const today = new Date().toISOString().slice(0, 10);
   const entry = getDailyByDate(today) || _dailyBlankEntry(today);
+
+  // Collect task ratings from Step 4 UI
+  const taskRatings = {};
+  document.querySelectorAll('#de-task-ratings [data-taskid-diff]').forEach(inp => {
+    const tid = inp.dataset.taskidDiff;
+    if (!taskRatings[tid]) taskRatings[tid] = {};
+    taskRatings[tid].wouldDoDiff = inp.value.trim();
+  });
+  document.querySelectorAll('#de-task-ratings .de-rating-btn.active').forEach(btn => {
+    const tid = btn.dataset.taskid;
+    if (!taskRatings[tid]) taskRatings[tid] = {};
+    taskRatings[tid].rating = +btn.dataset.rating;
+  });
+
   entry.evening = {
     energy: _dailyEveningEnergy,
     feeling: _dailyEveningFeeling,
-    whatWorked: worked,
-    whatDidNotWork: document.getElementById('daily-e-notworked').value.trim(),
+    goodThings: document.getElementById('daily-e-goodthings').value.trim(),
     wins: document.getElementById('daily-e-wins').value.trim(),
+    whatWorked: document.getElementById('daily-e-worked').value.trim(),
+    whatDidNotWork: document.getElementById('daily-e-notworked').value.trim(),
     mistakes: document.getElementById('daily-e-mistakes').value.trim(),
+    intelligentContent: document.getElementById('daily-e-content').value.trim(),
+    mainNews: document.getElementById('daily-e-news').value.trim(),
+    carryToTomorrow: document.getElementById('daily-e-carry').value.trim(),
     tomorrowFocus: document.getElementById('daily-e-tomorrow').value.trim(),
-    notes: document.getElementById('daily-e-notes').value.trim()
+    notes: document.getElementById('daily-e-notes').value.trim(),
+    taskRatings
   };
 
-  // Apply habit completion from checkboxes (set state, not toggle)
+  // Apply habit completion from checkboxes
   if (typeof habLoad === 'function') {
     const checkboxes = document.querySelectorAll('#daily-e-habits input[type="checkbox"][data-habid]');
     if (checkboxes.length) {
@@ -6712,12 +7251,11 @@ function saveEveningReview() {
         else if (!cb.checked && idx >= 0) h.completedDates.splice(idx, 1);
       });
       habSave(habits);
-      // Refresh Habit Tracker if currently active
       if (document.getElementById('page-habitos')?.classList.contains('active')) renderHabitos();
     }
-    // Record checked habit IDs in daily entry
     entry.habits = {};
-    checkboxes.forEach(cb => { entry.habits[cb.dataset.habid] = cb.checked; });
+    document.querySelectorAll('#daily-e-habits input[type="checkbox"][data-habid]')
+      .forEach(cb => { entry.habits[cb.dataset.habid] = cb.checked; });
   }
 
   // Apply task completion from tiles
@@ -6734,14 +7272,13 @@ function saveEveningReview() {
       savePlan(PLAN);
       if (document.getElementById('page-planejamento')?.classList.contains('active')) renderPlanejamento();
     }
-    // Record task states in daily entry
     entry.completedTasks = [];
     taskCbs.forEach(cb => { if (cb.checked) entry.completedTasks.push(+cb.dataset.taskid); });
   }
 
   saveDailyEntry(today, entry);
   closeEveningReview();
-  showToast('Revisão salva ✓');
+  showToast('Fechamento salvo \u2713');
   if (document.querySelector('#plan-tabs [data-plantab="diario"]')?.classList.contains('active')) renderDailyUpdate();
 }
 
@@ -6870,9 +7407,7 @@ function getNeglectedAreas(days) {
 
 // ── Wire modal buttons ──
 document.getElementById('daily-m-cancel').addEventListener('click', closeMorningCheckin);
-document.getElementById('daily-m-save').addEventListener('click', saveMorningCheckin);
 document.getElementById('daily-e-cancel').addEventListener('click', closeEveningReview);
-document.getElementById('daily-e-save').addEventListener('click', saveEveningReview);
 
 // ── ESC closes daily modals ──
 document.addEventListener('keydown', function(e) {
@@ -6880,5 +7415,74 @@ document.addEventListener('keydown', function(e) {
 });
 
 console.log('[Daily] System loaded — DAILY_KEY:', DAILY_KEY);
+</script>
+
+<style>
+#dev-console{position:fixed;bottom:0;right:0;width:420px;max-height:320px;background:#1a1a1a;color:#e0e0e0;font-family:monospace;font-size:11px;z-index:99999;display:flex;flex-direction:column;border-top-left-radius:12px;box-shadow:0 -4px 32px rgba(0,0,0,.35);transition:max-height .2s}
+#dev-console.collapsed{max-height:36px}
+#dev-con-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:#111;border-top-left-radius:12px;cursor:pointer;flex-shrink:0;user-select:none}
+#dev-con-bar span{font-size:11px;font-weight:700;color:#aaa;letter-spacing:.06em}
+#dev-con-count{font-size:10px;padding:2px 7px;border-radius:8px;background:#2a2a2a;color:#888;margin-left:8px}
+#dev-con-btns{display:flex;gap:6px}
+#dev-con-clear{font-size:10px;padding:2px 8px;border-radius:6px;background:#2a2a2a;color:#888;cursor:pointer;border:none;font-family:inherit}
+#dev-con-clear:hover{background:#3a3a3a;color:#ccc}
+#dev-con-body{flex:1;overflow-y:auto;padding:6px 4px}
+#dev-con-body::-webkit-scrollbar{width:3px}
+#dev-con-body::-webkit-scrollbar-thumb{background:#333}
+.dc-line{padding:3px 8px;border-bottom:1px solid #222;display:flex;gap:8px;align-items:flex-start;line-height:1.4;word-break:break-all}
+.dc-line:last-child{border-bottom:none}
+.dc-ico{flex-shrink:0;font-size:10px;margin-top:1px}
+.dc-log .dc-ico::before{content:"\00BB";color:#888}
+.dc-warn .dc-ico::before{content:"\26A0";color:#e6a817}
+.dc-warn{background:rgba(230,168,23,.06)}
+.dc-err .dc-ico::before{content:"\2716";color:#ff4444}
+.dc-err{background:rgba(255,68,68,.06)}
+.dc-grp .dc-ico::before{content:"\25BC";color:#888}
+.dc-txt{flex:1;color:#ccc}
+.dc-warn .dc-txt{color:#e6c060}
+.dc-err .dc-txt{color:#ff7070}
+.dc-ts{font-size:9px;color:#444;flex-shrink:0;padding-top:2px}
+</style>
+<div id="dev-console">
+  <div id="dev-con-bar" onclick="devToggle()">
+    <div style="display:flex;align-items:center">
+      <span>&#8984; CONSOLE</span>
+      <span id="dev-con-count" style="font-size:10px;padding:2px 7px;border-radius:8px;background:#2a2a2a;color:#888;margin-left:8px">0 logs</span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button id="dev-con-clear" onclick="event.stopPropagation();devClear()" style="font-size:10px;padding:2px 8px;border-radius:6px;background:#2a2a2a;color:#888;cursor:pointer;border:none;font-family:inherit">limpar</button>
+      <span id="dev-con-arrow" style="color:#555;font-size:12px">&#9650;</span>
+    </div>
+  </div>
+  <div id="dev-con-body" style="flex:1;overflow-y:auto;padding:6px 4px"></div>
+</div>
+<script>
+(function(){
+  var body=document.getElementById("dev-con-body");
+  var cnt=document.getElementById("dev-con-count");
+  var total=0;
+  function fmt(a){if(typeof a==="object"){try{return JSON.stringify(a,null,2)}catch(e){return String(a)}}return String(a)}
+  function addLine(type,args){
+    total++;
+    var txt=Array.from(args).map(fmt).join(" ");
+    var now=new Date();
+    var ts=now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0")+":"+now.getSeconds().toString().padStart(2,"0");
+    var line=document.createElement("div");
+    line.className="dc-line dc-"+type;
+    line.innerHTML='<span class="dc-ico"></span><span class="dc-txt">'+txt.replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</span><span class="dc-ts">'+ts+'</span>';
+    body.appendChild(line);
+    body.scrollTop=body.scrollHeight;
+    cnt.textContent=total+" log"+(total!==1?"s":"");
+  }
+  var _l=console.log,_w=console.warn,_e=console.error,_g=console.group,_ge=console.groupEnd;
+  console.log=function(){_l.apply(console,arguments);addLine("log",arguments)};
+  console.warn=function(){_w.apply(console,arguments);addLine("warn",arguments)};
+  console.error=function(){_e.apply(console,arguments);addLine("err",arguments)};
+  console.group=function(){_g.apply(console,arguments);addLine("grp",arguments)};
+  console.groupEnd=function(){_ge.apply(console,arguments)};
+  window.addEventListener("error",function(e){addLine("err",[e.message+" ("+e.filename+":"+e.lineno+")"])});
+})();
+function devToggle(){var c=document.getElementById("dev-console"),a=document.getElementById("dev-con-arrow");if(c.classList.contains("collapsed")){c.classList.remove("collapsed");a.textContent="▲"}else{c.classList.add("collapsed");a.textContent="▼"}}
+function devClear(){document.getElementById("dev-con-body").innerHTML="";document.getElementById("dev-con-count").textContent="0 logs"}
 </script>
 </html>
